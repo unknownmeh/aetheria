@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sign In | Aetheria Publishing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+    /* ══════════════════════════════════════
+       AETHERIA · CLEAN EDITORIAL AUTH PAGE
+    ══════════════════════════════════════ */
+    :root {
+        --ink:         #111827;
+        --ink-soft:    #374151;
+        --ink-muted:   #9CA3AF;
+        --ink-faint:   #D1D5DB;
+
+        --cream:       #FAFAF8;
+        --cream-dark:  #F3F2EF;
+        --white:       #FFFFFF;
+
+        --accent:      #1B4332;
+        --accent-mid:  #2D6A4F;
+        --accent-light:#D1FAE5;
+        --accent-glow: rgba(27,67,50,0.12);
+
+        --sand:        #E8E0D3;
+        --rust:        #C0392B;
+        --rust-light:  #FEF2F2;
+
+        --border:      #E5E7EB;
+        --border-dark: #D1D5DB;
+
+        --shadow-sm:   0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+        --shadow-md:   0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
+        --shadow-lg:   0 20px 60px rgba(0,0,0,0.1), 0 8px 24px rgba(0,0,0,0.06);
+
+        --radius-xs:   6px;
+        --radius-sm:   10px;
+        --radius:      16px;
+        --radius-lg:   24px;
+
+        --ease:        cubic-bezier(0.4, 0, 0.2, 1);
+        --transition:  all 0.22s var(--ease);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html {
+        height: 100%;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Outfit', sans-serif;
+        min-height: 100vh;
+        min-height: 100dvh;
+        background: var(--cream);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+    }
+
+    /* ── LAYOUT ── */
+    .page-layout {
+        display: flex;
+        min-height: 100vh;
+        min-height: 100dvh;
+        flex: 1;
+    }
+
+    /* ── LEFT PANEL (editorial) ── */
+    .side-panel {
+        display: none;
+        width: 42%;
+        flex-shrink: 0;
+        background: var(--accent);
+        position: relative;
+        overflow: hidden;
+        padding: clamp(2.5rem, 5vw, 4rem);
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    @media (min-width: 900px) {
+        .side-panel { display: flex; }
+    }
+
+    /* Texture dots */
+    .side-panel::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+            radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(0,0,0,0.15) 0%, transparent 50%);
+        pointer-events: none;
+    }
+
+    /* Decorative lines */
+    .side-panel::after {
+        content: '';
+        position: absolute;
+        bottom: -80px;
+        right: -80px;
+        width: 320px;
+        height: 320px;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 50%;
+    }
+
+    .side-ring {
+        position: absolute;
+        bottom: -140px;
+        right: -140px;
+        width: 480px;
+        height: 480px;
+        border: 1px solid rgba(255,255,255,0.05);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .side-top { position: relative; z-index: 2; }
+
+    .side-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+        margin-bottom: 3rem;
+    }
+
+    .side-logo-mark {
+        width: 36px;
+        height: 36px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        color: #fff;
+    }
+
+    .side-logo-text {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 0.01em;
+    }
+
+    .side-headline {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2rem, 3.5vw, 2.8rem);
+        font-weight: 600;
+        color: #fff;
+        line-height: 1.18;
+        margin-bottom: 1.2rem;
+    }
+
+    .side-headline em {
+        font-style: italic;
+        color: rgba(255,255,255,0.7);
+    }
+
+    .side-body {
+        font-size: 0.95rem;
+        color: rgba(255,255,255,0.6);
+        line-height: 1.7;
+        font-weight: 300;
+        max-width: 340px;
+    }
+
+    .side-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .stat-block {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: var(--radius-sm);
+        padding: 1rem 1.1rem;
+    }
+
+    .stat-number {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1;
+        margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+        color: rgba(255,255,255,0.5);
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    .side-quote {
+        position: relative;
+        z-index: 2;
+        border-left: 2px solid rgba(255,255,255,0.25);
+        padding-left: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .side-quote p {
+        font-size: 0.88rem;
+        color: rgba(255,255,255,0.55);
+        font-style: italic;
+        line-height: 1.65;
+        font-weight: 300;
+    }
+
+    .side-quote cite {
+        display: block;
+        font-size: 0.75rem;
+        color: rgba(255,255,255,0.35);
+        font-style: normal;
+        margin-top: 0.5rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    /* ── RIGHT PANEL (form area) ── */
+    .form-panel-wrap {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        min-height: 100dvh;
+        background: var(--white);
+        overflow-y: auto;
+    }
+
+    .form-top-bar {
+        padding: 1.25rem clamp(1.25rem, 5vw, 3rem);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+    }
+
+    /* Show logo only on mobile (no side panel) */
+    .mobile-logo {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--accent);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .mobile-logo-mark {
+        width: 28px;
+        height: 28px;
+        background: var(--accent);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        color: #fff;
+    }
+
+    @media (min-width: 900px) {
+        .mobile-logo { display: none; }
+    }
+
+    .topbar-link {
+        font-size: 0.83rem;
+        color: var(--ink-muted);
+        text-decoration: none;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        transition: var(--transition);
+    }
+
+    .topbar-link:hover { color: var(--ink); }
+
+    .form-main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 6vw, 3.5rem);
+    }
+
+    .auth-box {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    /* ── TABS ── */
+    .tab-switcher {
+        display: flex;
+        background: var(--cream-dark);
+        border-radius: var(--radius-sm);
+        padding: 4px;
+        margin-bottom: 2rem;
+        gap: 2px;
+    }
+
+    .tab-btn {
+        flex: 1;
+        padding: 0.6rem 1rem;
+        border: none;
+        background: transparent;
+        border-radius: calc(var(--radius-sm) - 2px);
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.87rem;
+        font-weight: 500;
+        color: var(--ink-muted);
+        cursor: pointer;
+        transition: var(--transition);
+        letter-spacing: 0.01em;
+    }
+
+    .tab-btn.active {
+        background: var(--white);
+        color: var(--ink);
+        box-shadow: var(--shadow-sm);
+        font-weight: 600;
+    }
+
+    .tab-btn:not(.active):hover { color: var(--ink-soft); }
+
+    /* ── PANEL HEADER ── */
+    .panel-header {
+        margin-bottom: 1.75rem;
+    }
+
+    .panel-eyebrow {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent-mid);
+        margin-bottom: 0.45rem;
+    }
+
+    .panel-title {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(1.55rem, 4vw, 1.9rem);
+        font-weight: 700;
+        color: var(--ink);
+        line-height: 1.15;
+        margin-bottom: 0.45rem;
+    }
+
+    .panel-sub {
+        font-size: 0.875rem;
+        color: var(--ink-muted);
+        font-weight: 300;
+        line-height: 1.6;
+    }
+
+    /* ── SOCIAL ── */
+    .social-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.65rem;
+        margin-bottom: 1.35rem;
+    }
+
+    .social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        padding: 0.68rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border);
+        background: var(--white);
+        color: var(--ink-soft);
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.83rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .social-btn:hover {
+        border-color: var(--border-dark);
+        background: var(--cream-dark);
+        color: var(--ink);
+    }
+
+    .social-btn i { font-size: 0.95rem; }
+    .social-btn .fa-google { color: #EA4335; }
+    .social-btn .fa-facebook-f { color: #1877F2; }
+
+    /* ── DIVIDER ── */
+    .or-divider {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-bottom: 1.35rem;
+        color: var(--ink-faint);
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .or-divider::before, .or-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+    }
+
+    /* ── FORM GROUPS ── */
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--ink-soft);
+        margin-bottom: 0.45rem;
+        letter-spacing: 0.01em;
+    }
+
+    .input-wrap {
+        position: relative;
+    }
+
+    .input-icon {
+        position: absolute;
+        left: 0.9rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--ink-faint);
+        font-size: 0.85rem;
+        pointer-events: none;
+        transition: var(--transition);
+    }
+
+    .clean-input {
+        width: 100%;
+        padding: 0.78rem 0.9rem 0.78rem 2.6rem;
+        border-radius: var(--radius-sm);
+        border: 1.5px solid var(--border);
+        background: var(--white);
+        color: var(--ink);
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 400;
+        outline: none;
+        transition: var(--transition);
+        -webkit-appearance: none;
+    }
+
+    .clean-input::placeholder {
+        color: var(--ink-faint);
+        font-weight: 300;
+    }
+
+    .clean-input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .clean-input:focus ~ .input-icon,
+    .input-wrap:focus-within .input-icon {
+        color: var(--accent);
+    }
+
+    .clean-input.valid {
+        border-color: #22C55E;
+    }
+
+    .clean-input.invalid {
+        border-color: var(--rust);
+    }
+
+    .pwd-toggle {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--ink-muted);
+        font-size: 0.85rem;
+        padding: 0.25rem;
+        transition: var(--transition);
+    }
+
+    .pwd-toggle:hover { color: var(--ink); }
+
+    /* Password strength */
+    .pwd-strength {
+        margin-top: 0.5rem;
+    }
+
+    .pwd-strength-track {
+        height: 3px;
+        border-radius: 999px;
+        background: var(--border);
+        overflow: hidden;
+        margin-bottom: 0.3rem;
+    }
+
+    .pwd-strength-fill {
+        height: 100%;
+        border-radius: 999px;
+        width: 0%;
+        transition: width 0.35s var(--ease), background 0.35s var(--ease);
+    }
+
+    .pwd-strength-label {
+        font-size: 0.7rem;
+        color: var(--ink-muted);
+    }
+
+    /* Form row */
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+    }
+
+    /* Checkbox */
+    .check-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.65rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .clean-check {
+        width: 17px;
+        height: 17px;
+        flex-shrink: 0;
+        margin-top: 2px;
+        border-radius: 4px;
+        border: 1.5px solid var(--border-dark);
+        background: var(--white);
+        appearance: none;
+        cursor: pointer;
+        transition: var(--transition);
+        position: relative;
+    }
+
+    .clean-check:checked {
+        background: var(--accent);
+        border-color: var(--accent);
+    }
+
+    .clean-check:checked::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 5px;
+        width: 5px;
+        height: 9px;
+        border: 2px solid #fff;
+        border-top: none;
+        border-left: none;
+        transform: rotate(45deg);
+    }
+
+    .check-label {
+        font-size: 0.8rem;
+        color: var(--ink-muted);
+        line-height: 1.6;
+        font-weight: 400;
+    }
+
+    .check-label a {
+        color: var(--accent-mid);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .check-label a:hover { text-decoration: underline; }
+
+    /* ── FORGOT LINK ── */
+    .forgot-row {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: -0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .forgot-link {
+        font-size: 0.78rem;
+        color: var(--ink-muted);
+        text-decoration: none;
+        font-weight: 500;
+        transition: var(--transition);
+    }
+
+    .forgot-link:hover { color: var(--accent-mid); }
+
+    /* ── SUBMIT BUTTON ── */
+    .btn-submit {
+        width: 100%;
+        padding: 0.88rem 2rem;
+        border-radius: var(--radius-sm);
+        border: none;
+        cursor: pointer;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        background: var(--accent);
+        color: #fff;
+        transition: var(--transition);
+        box-shadow: 0 2px 8px rgba(27,67,50,0.25);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-submit::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%);
+        pointer-events: none;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+        background: var(--accent-mid);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(27,67,50,0.3);
+    }
+
+    .btn-submit:active:not(:disabled) {
+        transform: translateY(0);
+    }
+
+    .btn-submit:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+    /* ── MESSAGES ── */
+    .form-msg {
+        display: none;
+        align-items: flex-start;
+        gap: 0.6rem;
+        padding: 0.75rem 0.9rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.83rem;
+        font-weight: 400;
+        line-height: 1.5;
+        margin-top: 0.85rem;
+    }
+
+    .form-msg i { margin-top: 1px; flex-shrink: 0; }
+
+    .form-msg.error {
+        background: var(--rust-light);
+        color: var(--rust);
+        border: 1px solid rgba(192,57,43,0.15);
+    }
+
+    .form-msg.success {
+        background: var(--accent-light);
+        color: var(--accent);
+        border: 1px solid rgba(27,67,50,0.15);
+    }
+
+    /* ── TRUST ROW ── */
+    .trust-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.25rem;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .trust-item {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.73rem;
+        color: var(--ink-muted);
+        font-weight: 400;
+    }
+
+    .trust-item i { font-size: 0.7rem; color: var(--ink-faint); }
+
+    /* ── FOOTER ── */
+    .form-footer {
+        padding: 1.2rem clamp(1.25rem, 5vw, 3rem);
+        border-top: 1px solid var(--border);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer-text {
+        font-size: 0.75rem;
+        color: var(--ink-muted);
+    }
+
+    .footer-text a {
+        color: var(--accent-mid);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .footer-text a:hover { text-decoration: underline; }
+
+    /* ── FORM PANELS ── */
+    .form-panel { display: none; }
+    .form-panel.active {
+        display: block;
+        animation: panel-in 0.3s var(--ease) both;
+    }
+
+    @keyframes panel-in {
+        from { opacity: 0; transform: translateY(8px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── BACK BUTTON ── */
+    .back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: none;
+        border: none;
+        color: var(--ink-muted);
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 0;
+        margin-bottom: 1.5rem;
+        transition: var(--transition);
+    }
+
+    .back-btn:hover { color: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+        .form-row { grid-template-columns: 1fr; }
+        .social-row { grid-template-columns: 1fr 1fr; }
+        .form-main { padding: 1.5rem 1.25rem; }
+        .tab-btn { font-size: 0.82rem; padding: 0.55rem 0.75rem; }
+    }
+
+    @media (max-width: 360px) {
+        .social-row { grid-template-columns: 1fr; }
+    }
+    </style>
+</head>
+<body>
+
+<div class="page-layout">
+
+    <!-- LEFT SIDE PANEL (desktop only) -->
+    <aside class="side-panel">
+        <div class="side-ring"></div>
+
+        <div class="side-top">
+            <a href="index.html" class="side-logo">
+                <div class="side-logo-mark"><i class="fas fa-feather-alt"></i></div>
+                <span class="side-logo-text">Aetheria Publishing</span>
+            </a>
+
+            <h2 class="side-headline">Where stories find <em>their readers.</em></h2>
+            <p class="side-body">Join a community of writers and readers who believe every great story deserves to be heard. Publish, discover, and connect.</p>
+        </div>
+
+        <div>
+            <div class="side-stats">
+                <div class="stat-block">
+                    <div class="stat-number">42K+</div>
+                    <div class="stat-label">Authors</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-number">1.2M</div>
+                    <div class="stat-label">Readers</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-number">98K</div>
+                    <div class="stat-label">Stories</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-number">4.9★</div>
+                    <div class="stat-label">Avg Rating</div>
+                </div>
+            </div>
+
+            <div class="side-quote">
+                <p>"Every great story begins with a single brave act — writing it down."</p>
+                <cite>— Aetheria Publishing</cite>
+            </div>
+        </div>
+    </aside>
+
+    <!-- RIGHT FORM PANEL -->
+    <div class="form-panel-wrap">
+
+        <header class="form-top-bar">
+            <a href="index.html" class="mobile-logo">
+                <div class="mobile-logo-mark"><i class="fas fa-feather-alt"></i></div>
+                Aetheria
+            </a>
+            <a href="index.html" class="topbar-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to home
+            </a>
+        </header>
+
+        <main class="form-main">
+            <div class="auth-box">
+
+                <!-- Tabs -->
+                <div class="tab-switcher" role="tablist">
+                    <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')" role="tab" aria-selected="true">Sign In</button>
+                    <button class="tab-btn inactive" id="tabRegister" onclick="switchTab('register')" role="tab" aria-selected="false">Create Account</button>
+                </div>
+
+                <!-- ── LOGIN PANEL ── -->
+                <div class="form-panel active" id="panelLogin" role="tabpanel">
+                    <div class="panel-header">
+                        <p class="panel-eyebrow">Welcome back</p>
+                        <h1 class="panel-title">Sign in to your account</h1>
+                        <p class="panel-sub">Don't have an account? <a href="#" onclick="switchTab('register'); return false;" style="color:var(--accent-mid);text-decoration:none;font-weight:500;">Create one free</a></p>
+                    </div>
+
+                    <div class="social-row">
+                        <button class="social-btn" onclick="socialLogin('Google')">
+                            <i class="fab fa-google"></i> Google
+                        </button>
+                        <button class="social-btn" onclick="socialLogin('Facebook')">
+                            <i class="fab fa-facebook-f"></i> Facebook
+                        </button>
+                    </div>
+
+                    <div class="or-divider">or continue with email</div>
+
+                    <form id="loginForm" onsubmit="handleLogin(event)" novalidate>
+                        <div class="form-group">
+                            <label class="form-label" for="loginEmail">Email address</label>
+                            <div class="input-wrap">
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input type="email" id="loginEmail" class="clean-input"
+                                    placeholder="you@example.com"
+                                    oninput="validateEmail(this)" autocomplete="email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="loginPwd">Password</label>
+                            <div class="input-wrap">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" id="loginPwd" class="clean-input"
+                                    placeholder="Enter your password"
+                                    autocomplete="current-password">
+                                <button type="button" class="pwd-toggle" onclick="togglePwd('loginPwd', this)" aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="forgot-row">
+                            <a href="#" class="forgot-link" onclick="showForgot(event)">Forgot password?</a>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="loginBtn">Sign In</button>
+
+                        <div class="form-msg" id="loginMsg" role="alert"></div>
+                    </form>
+
+                    <div class="trust-row">
+                        <div class="trust-item"><i class="fas fa-lock"></i> SSL Encrypted</div>
+                        <div class="trust-item"><i class="fas fa-tag"></i> Always Free</div>
+                        <div class="trust-item"><i class="fas fa-shield-alt"></i> Privacy First</div>
+                    </div>
+                </div>
+
+                <!-- ── REGISTER PANEL ── -->
+                <div class="form-panel" id="panelRegister" role="tabpanel">
+                    <div class="panel-header">
+                        <p class="panel-eyebrow">New here?</p>
+                        <h1 class="panel-title">Create your account</h1>
+                        <p class="panel-sub">Already have an account? <a href="#" onclick="switchTab('login'); return false;" style="color:var(--accent-mid);text-decoration:none;font-weight:500;">Sign in</a></p>
+                    </div>
+
+                    <div class="social-row">
+                        <button class="social-btn" onclick="socialLogin('Google')">
+                            <i class="fab fa-google"></i> Google
+                        </button>
+                        <button class="social-btn" onclick="socialLogin('Facebook')">
+                            <i class="fab fa-facebook-f"></i> Facebook
+                        </button>
+                    </div>
+
+                    <div class="or-divider">or sign up with email</div>
+
+                    <form id="registerForm" onsubmit="handleRegister(event)" novalidate>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="regFirst">First name</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input type="text" id="regFirst" class="clean-input"
+                                        placeholder="Jane" autocomplete="given-name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="regLast">Last name</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input type="text" id="regLast" class="clean-input"
+                                        placeholder="Doe" autocomplete="family-name">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="regEmail">Email address</label>
+                            <div class="input-wrap">
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input type="email" id="regEmail" class="clean-input"
+                                    placeholder="you@example.com"
+                                    oninput="validateEmail(this)" autocomplete="email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="regPwd">Password</label>
+                            <div class="input-wrap">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" id="regPwd" class="clean-input"
+                                    placeholder="Create a strong password"
+                                    oninput="checkStrength(this.value); checkMatch()"
+                                    autocomplete="new-password">
+                                <button type="button" class="pwd-toggle" onclick="togglePwd('regPwd', this)" aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="pwd-strength">
+                                <div class="pwd-strength-track"><div class="pwd-strength-fill" id="pwdFill"></div></div>
+                                <span class="pwd-strength-label" id="pwdLabel">Enter a password</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="regPwdConfirm">Confirm password</label>
+                            <div class="input-wrap">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input type="password" id="regPwdConfirm" class="clean-input"
+                                    placeholder="Repeat your password"
+                                    oninput="checkMatch()"
+                                    autocomplete="new-password">
+                                <button type="button" class="pwd-toggle" onclick="togglePwd('regPwdConfirm', this)" aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="check-row">
+                            <input type="checkbox" id="agreeTerms" class="clean-check">
+                            <label class="check-label" for="agreeTerms">
+                                I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="registerBtn">Create Account</button>
+
+                        <div class="form-msg" id="registerMsg" role="alert"></div>
+                    </form>
+
+                    <div class="trust-row">
+                        <div class="trust-item"><i class="fas fa-lock"></i> SSL Encrypted</div>
+                        <div class="trust-item"><i class="fas fa-tag"></i> Always Free</div>
+                        <div class="trust-item"><i class="fas fa-shield-alt"></i> Privacy First</div>
+                    </div>
+                </div>
+
+                <!-- ── FORGOT PANEL ── -->
+                <div class="form-panel" id="panelForgot" role="tabpanel">
+                    <button class="back-btn" onclick="switchTab('login')">
+                        <i class="fas fa-arrow-left"></i> Back to sign in
+                    </button>
+
+                    <div class="panel-header">
+                        <p class="panel-eyebrow">Account recovery</p>
+                        <h1 class="panel-title">Reset your password</h1>
+                        <p class="panel-sub">Enter your email and we'll send you a reset link within a few minutes.</p>
+                    </div>
+
+                    <form id="forgotForm" onsubmit="handleForgot(event)" novalidate>
+                        <div class="form-group">
+                            <label class="form-label" for="forgotEmail">Email address</label>
+                            <div class="input-wrap">
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input type="email" id="forgotEmail" class="clean-input"
+                                    placeholder="you@example.com"
+                                    oninput="validateEmail(this)" autocomplete="email">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit" style="margin-top:0.35rem;">
+                            <i class="fas fa-paper-plane" style="margin-right:0.5rem;font-size:0.9em;"></i> Send Reset Link
+                        </button>
+
+                        <div class="form-msg" id="forgotMsg" role="alert"></div>
+                    </form>
+                </div>
+
+            </div><!-- /auth-box -->
+        </main>
+
+        <footer class="form-footer">
+            <p class="footer-text">
+                © <script>document.write(new Date().getFullYear())</script> Aetheria Publishing · 
+                <a href="#">Privacy</a> · 
+                <a href="#">Terms</a> · 
+                <a href="#">Help</a>
+            </p>
+        </footer>
+
+    </div><!-- /form-panel-wrap -->
+
+</div><!-- /page-layout -->
+
+<script>
+/* ── TAB SWITCHING ── */
+function switchTab(tab) {
+    const panels = ['panelLogin','panelRegister','panelForgot'];
+    const tabs = ['tabLogin','tabRegister'];
+
+    panels.forEach(id => {
+        const el = document.getElementById(id);
+        el.classList.remove('active');
+        el.style.display = '';
+    });
+
+    tabs.forEach(id => {
+        const el = document.getElementById(id);
+        el.className = 'tab-btn inactive';
+        el.setAttribute('aria-selected','false');
+    });
+
+    if (tab === 'login') {
+        document.getElementById('panelLogin').classList.add('active');
+        document.getElementById('tabLogin').className = 'tab-btn active';
+        document.getElementById('tabLogin').setAttribute('aria-selected','true');
+        document.title = 'Sign In | Aetheria Publishing';
+    } else if (tab === 'register') {
+        document.getElementById('panelRegister').classList.add('active');
+        document.getElementById('tabRegister').className = 'tab-btn active';
+        document.getElementById('tabRegister').setAttribute('aria-selected','true');
+        document.title = 'Create Account | Aetheria Publishing';
+    } else {
+        document.getElementById('panelForgot').classList.add('active');
+        document.title = 'Reset Password | Aetheria Publishing';
+    }
+}
+
+function showForgot(e) { e.preventDefault(); switchTab('forgot'); }
+
+/* ── PASSWORD TOGGLE ── */
+function togglePwd(id, btn) {
+    const inp = document.getElementById(id);
+    const isText = inp.type === 'text';
+    inp.type = isText ? 'password' : 'text';
+    btn.innerHTML = isText ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+}
+
+/* ── PASSWORD STRENGTH ── */
+function checkStrength(val) {
+    const fill = document.getElementById('pwdFill');
+    const label = document.getElementById('pwdLabel');
+    let score = 0;
+    if (val.length >= 8)  score++;
+    if (val.length >= 12) score++;
+    if (/[A-Z]/.test(val)) score++;
+    if (/[0-9]/.test(val)) score++;
+    if (/[^A-Za-z0-9]/.test(val)) score++;
+
+    const levels = [
+        { pct: '0%',   color: 'transparent',  text: 'Enter a password' },
+        { pct: '20%',  color: '#EF4444',       text: 'Very weak' },
+        { pct: '40%',  color: '#F97316',       text: 'Weak' },
+        { pct: '60%',  color: '#EAB308',       text: 'Fair' },
+        { pct: '80%',  color: '#22C55E',       text: 'Strong' },
+        { pct: '100%', color: '#16A34A',       text: 'Very strong ✓' },
+    ];
+    const l = levels[Math.min(score, 5)];
+    fill.style.width = l.pct;
+    fill.style.background = l.color;
+    label.textContent = l.text;
+    label.style.color = l.color === 'transparent' ? 'var(--ink-muted)' : l.color;
+}
+
+/* ── EMAIL VALIDATION ── */
+function validateEmail(inp) {
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inp.value);
+    inp.classList.toggle('valid', ok && inp.value.length > 0);
+    inp.classList.toggle('invalid', !ok && inp.value.length > 0);
+}
+
+/* ── PASSWORD MATCH ── */
+function checkMatch() {
+    const a = document.getElementById('regPwd').value;
+    const b = document.getElementById('regPwdConfirm');
+    const ok = a === b.value && b.value.length > 0;
+    b.classList.toggle('valid', ok);
+    b.classList.toggle('invalid', !ok && b.value.length > 0);
+}
+
+/* ── MESSAGES ── */
+function showMsg(id, text, type) {
+    const el = document.getElementById(id);
+    el.className = `form-msg ${type}`;
+    el.innerHTML = `<i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i> ${text}`;
+    el.style.display = 'flex';
+}
+function hideMsg(id) { document.getElementById(id).style.display = 'none'; }
+
+/* ── LOADING ── */
+function setLoading(btnId, loading) {
+    const btn = document.getElementById(btnId);
+    if (loading) {
+        btn.disabled = true;
+        btn.dataset.orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Processing…';
+        btn.style.opacity = '.75';
+    } else {
+        btn.disabled = false;
+        btn.innerHTML = btn.dataset.orig || btn.innerHTML;
+        btn.style.opacity = '1';
+    }
+}
+
+/* ── FORM HANDLERS ── */
+function handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim();
+    const pwd   = document.getElementById('loginPwd').value;
+    hideMsg('loginMsg');
+
+    if (!email)                                           { showMsg('loginMsg','Please enter your email address.','error'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))       { showMsg('loginMsg','Please enter a valid email address.','error'); return; }
+    if (!pwd)                                             { showMsg('loginMsg','Please enter your password.','error'); return; }
+
+    setLoading('loginBtn', true);
+    setTimeout(() => {
+        setLoading('loginBtn', false);
+        showMsg('loginMsg','Welcome back! Redirecting you to your dashboard…','success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1800);
+    }, 1600);
+}
+
+function handleRegister(e) {
+    e.preventDefault();
+    const first = document.getElementById('regFirst').value.trim();
+    const last  = document.getElementById('regLast').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const pwd   = document.getElementById('regPwd').value;
+    const conf  = document.getElementById('regPwdConfirm').value;
+    const agree = document.getElementById('agreeTerms').checked;
+    hideMsg('registerMsg');
+
+    if (!first || !last)                                  { showMsg('registerMsg','Please enter your full name.','error'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))       { showMsg('registerMsg','Please enter a valid email address.','error'); return; }
+    if (pwd.length < 8)                                   { showMsg('registerMsg','Password must be at least 8 characters.','error'); return; }
+    if (pwd !== conf)                                     { showMsg('registerMsg','Passwords do not match.','error'); return; }
+    if (!agree)                                           { showMsg('registerMsg','Please agree to the Terms of Service to continue.','error'); return; }
+
+    setLoading('registerBtn', true);
+    setTimeout(() => {
+        setLoading('registerBtn', false);
+        showMsg('registerMsg',`Account created! Welcome, ${first}! Check your inbox to verify your email.`,'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 2200);
+    }, 1800);
+}
+
+function handleForgot(e) {
+    e.preventDefault();
+    const email = document.getElementById('forgotEmail').value.trim();
+    hideMsg('forgotMsg');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showMsg('forgotMsg','Please enter a valid email address.','error'); return; }
+
+    const btn = document.querySelector('#forgotForm .btn-submit');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Sending…';
+    btn.style.opacity = '.75';
+
+    setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right:0.5rem;font-size:0.9em;"></i> Send Reset Link';
+        btn.style.opacity = '1';
+        showMsg('forgotMsg','Reset link sent! Check your inbox (and spam folder).','success');
+    }, 1500);
+}
+
+function socialLogin(provider) {
+    const activePanel = document.getElementById('panelLogin').classList.contains('active') ? 'loginMsg' : 'registerMsg';
+    showMsg(activePanel, `Connecting to ${provider}… This feature will be available soon!`, 'error');
+}
+
+/* Init */
+switchTab('login');
+</script>
+</body>
+</html>

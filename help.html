@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Centre | Aetheria Publishing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+
+    /* ═══════════════════════════════════════════════════════
+       AETHERIA · NEUMORPHIC DESIGN SYSTEM
+       Warm parchment #e8e0d5 — consistent across all pages
+    ═══════════════════════════════════════════════════════ */
+    :root {
+        --bg:           #e8e0d5;
+        --bg-dark:      #ddd5c8;
+        --bg-light:     #f4ede3;
+        --bg-deeper:    #d6cec1;
+
+        --neu-out:      8px 8px 20px #c5bdb3, -8px -8px 20px #ffffff;
+        --neu-out-lg:   14px 14px 34px #b8b0a6, -14px -14px 34px #ffffff;
+        --neu-out-xl:   20px 20px 50px #b0a89e, -20px -20px 50px #ffffff;
+        --neu-in:       inset 6px 6px 14px #c5bdb3, inset -6px -6px 14px #ffffff;
+        --neu-in-sm:    inset 3px 3px 8px #c5bdb3, inset -3px -3px 8px #ffffff;
+        --neu-sm:       4px 4px 10px #c5bdb3, -4px -4px 10px #ffffff;
+        --neu-press:    inset 4px 4px 10px #c0b8ae, inset -2px -2px 6px #ffffff;
+
+        --gold:         #c9922a;
+        --gold-light:   #e8b54d;
+        --teal:         #3d8b85;
+        --rose:         #b85c5c;
+        --violet:       #6b5c8b;
+        --sage:         #5c7a5c;
+        --amber:        #b87c2a;
+        --blue:         #4a7cb5;
+
+        --text-primary:   #2d2518;
+        --text-secondary: #6b5f4f;
+        --text-muted:     #9b8f81;
+        --text-placeholder: #b0a898;
+
+        --radius:       20px;
+        --radius-lg:    28px;
+        --radius-sm:    12px;
+        --radius-xs:    8px;
+        --nav-h:        74px;
+        --transition:   all 0.32s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+        font-family:'Jost', sans-serif;
+        background:var(--bg); color:var(--text-primary);
+        line-height:1.75; overflow-x:hidden;
+        -webkit-font-smoothing:antialiased;
+    }
+    body::before {
+        content:''; position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.028;
+        background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size:160px;
+    }
+
+    /* ══ NAVBAR ══ */
+    .navbar {
+        position:fixed; top:0; width:100%; height:var(--nav-h);
+        background:var(--bg);
+        box-shadow:0 4px 18px #c0b8ae, 0 -1px 4px #ffffff;
+        z-index:1000;
+    }
+    .nav-container {
+        max-width:1300px; margin:0 auto;
+        padding:0 clamp(1rem,4vw,2.5rem);
+        height:100%; display:flex; align-items:center;
+        justify-content:space-between; gap:1.5rem;
+    }
+    .nav-logo {
+        font-family:'Cormorant Garamond',serif;
+        font-size:clamp(1.35rem,3vw,1.85rem); font-weight:700;
+        color:var(--gold); text-decoration:none; white-space:nowrap; flex-shrink:0;
+    }
+    .nav-links-wrap { display:flex; align-items:center; gap:2.5rem; }
+    .nav-links { display:flex; list-style:none; gap:clamp(.75rem,2vw,1.75rem); }
+    .nav-link {
+        color:var(--text-secondary); text-decoration:none;
+        font-size:.9rem; font-weight:500; letter-spacing:.04em;
+        padding:.4rem 0; position:relative; transition:var(--transition);
+    }
+    .nav-link::after {
+        content:''; position:absolute; bottom:0; left:0;
+        width:0; height:2px; background:var(--gold);
+        border-radius:2px; transition:var(--transition);
+    }
+    .nav-link:hover,.nav-link.active { color:var(--gold); }
+    .nav-link:hover::after,.nav-link.active::after { width:100%; }
+    .nav-actions { display:flex; gap:.75rem; align-items:center; }
+    .nav-btn {
+        padding:.58rem 1.3rem; border-radius:var(--radius-sm);
+        background:var(--bg); box-shadow:var(--neu-sm);
+        color:var(--text-primary); text-decoration:none;
+        font-size:.85rem; font-weight:500; transition:var(--transition); white-space:nowrap;
+        display:inline-flex; align-items:center; gap:.4rem; border:none; cursor:pointer; font-family:inherit;
+    }
+    .nav-btn:hover { box-shadow:var(--neu-press); }
+    .nav-btn-gold {
+        background:linear-gradient(135deg,var(--gold),var(--gold-light));
+        box-shadow:6px 6px 14px #c0b097,-3px -3px 8px #ffffffcc; color:#fff; font-weight:600;
+    }
+    .nav-btn-gold:hover { box-shadow:var(--neu-press); transform:scale(.98); }
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:.5rem; background:none; border:none; }
+    .hamburger span { display:block; width:24px; height:2px; background:var(--text-primary); border-radius:2px; transition:var(--transition); }
+    .hamburger.active span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity:0; }
+    .hamburger.active span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+    /* ══ HERO ══ */
+    .hero {
+        position:relative; z-index:1;
+        padding:calc(var(--nav-h) + 4.5rem) clamp(1rem,6vw,5rem) 3rem;
+        text-align:center; overflow:hidden;
+    }
+    .hero-deco {
+        position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+        font-family:'Cormorant Garamond',serif;
+        font-size:clamp(220px,32vw,480px); font-weight:700; line-height:1;
+        color:transparent; -webkit-text-stroke:1.5px rgba(201,146,42,.07);
+        pointer-events:none; user-select:none;
+    }
+    .hero-inner { position:relative; max-width:760px; margin:0 auto; }
+    .hero-chip {
+        display:inline-flex; align-items:center; gap:.5rem;
+        padding:.42rem 1.2rem; border-radius:999px;
+        background:var(--bg); box-shadow:var(--neu-sm);
+        font-size:.76rem; font-weight:600; letter-spacing:.1em;
+        text-transform:uppercase; color:var(--gold); margin-bottom:1.8rem;
+        animation:fadeUp .7s ease both;
+    }
+    .hero-title {
+        font-family:'Cormorant Garamond',serif;
+        font-size:clamp(2.8rem,7.5vw,5.8rem); font-weight:700;
+        line-height:1.06; margin-bottom:1.4rem;
+        animation:fadeUp .85s ease .1s both;
+    }
+    .hero-title em { font-style:italic; color:var(--gold); }
+    .hero-sub {
+        font-size:clamp(1rem,1.9vw,1.15rem); color:var(--text-secondary);
+        font-weight:300; max-width:600px; margin:0 auto 2.5rem;
+        animation:fadeUp 1s ease .2s both;
+    }
+
+    /* ══ SEARCH BAR ══ */
+    .search-wrap {
+        position:relative; max-width:580px; margin:0 auto;
+        animation:fadeUp 1.1s ease .3s both;
+    }
+    .search-box {
+        width:100%; padding:1rem 1.2rem 1rem 3.2rem;
+        border-radius:var(--radius); border:none;
+        background:var(--bg); box-shadow:var(--neu-in);
+        font-family:'Jost',sans-serif; font-size:1rem;
+        color:var(--text-primary); outline:none; transition:var(--transition);
+        -webkit-appearance:none;
+    }
+    .search-box::placeholder { color:var(--text-placeholder); }
+    .search-box:focus { box-shadow:var(--neu-in), 0 0 0 2px rgba(201,146,42,.25); }
+    .search-icon {
+        position:absolute; left:1.1rem; top:50%; transform:translateY(-50%);
+        color:var(--gold); font-size:1rem; pointer-events:none;
+    }
+    .search-btn {
+        position:absolute; right:.5rem; top:50%; transform:translateY(-50%);
+        padding:.55rem 1.3rem; border-radius:var(--radius-sm); border:none;
+        background:linear-gradient(135deg,var(--gold),var(--gold-light));
+        box-shadow:4px 4px 10px #c0b097,-2px -2px 6px #ffffffcc;
+        color:#fff; font-family:'Jost',sans-serif; font-size:.83rem; font-weight:600;
+        cursor:pointer; transition:var(--transition); white-space:nowrap;
+    }
+    .search-btn:hover { box-shadow:var(--neu-press); transform:translateY(-50%) scale(.97); }
+
+    /* Search results dropdown */
+    .search-results {
+        display:none; position:absolute; top:calc(100% + .5rem); left:0; right:0;
+        background:var(--bg); border-radius:var(--radius);
+        box-shadow:var(--neu-out-lg); z-index:100; max-height:320px; overflow-y:auto;
+        padding:.5rem;
+    }
+    .search-results.show { display:block; }
+    .sr-item {
+        display:flex; align-items:center; gap:.75rem;
+        padding:.65rem .9rem; border-radius:var(--radius-xs);
+        cursor:pointer; transition:var(--transition); text-decoration:none;
+    }
+    .sr-item:hover { background:var(--bg); box-shadow:var(--neu-in-sm); }
+    .sr-item i { color:var(--gold); font-size:.9rem; width:16px; text-align:center; flex-shrink:0; }
+    .sr-item span { font-size:.88rem; color:var(--text-secondary); }
+    .sr-item strong { color:var(--gold); }
+    .sr-none { padding:.9rem 1rem; font-size:.88rem; color:var(--text-muted); text-align:center; }
+
+    /* Popular tags */
+    .popular-tags {
+        display:flex; gap:.6rem; flex-wrap:wrap; justify-content:center;
+        margin-top:1.25rem;
+        animation:fadeUp 1.2s ease .4s both;
+    }
+    .pop-tag {
+        padding:.3rem .9rem; border-radius:999px;
+        background:var(--bg); box-shadow:var(--neu-sm);
+        font-size:.78rem; font-weight:500; color:var(--text-secondary);
+        cursor:pointer; transition:var(--transition); border:none; font-family:inherit;
+    }
+    .pop-tag:hover { box-shadow:var(--neu-press); color:var(--gold); }
+
+    /* ══ CATEGORY CARDS ══ */
+    .categories-section {
+        position:relative; z-index:1;
+        padding:clamp(3rem,6vw,6rem) clamp(1rem,5vw,4rem);
+        max-width:1300px; margin:0 auto;
+    }
+    .sec-heading { text-align:center; margin-bottom:clamp(2.5rem,5vw,4rem); }
+    .sec-tag {
+        display:inline-flex; align-items:center; gap:.4rem;
+        padding:.35rem 1rem; border-radius:999px;
+        background:var(--bg); box-shadow:var(--neu-sm);
+        font-size:.74rem; font-weight:600; letter-spacing:.12em;
+        text-transform:uppercase; color:var(--teal); margin-bottom:1.1rem;
+    }
+    .sec-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.9rem,4.5vw,3rem); font-weight:700; line-height:1.1; }
+    .sec-title em { font-style:italic; color:var(--gold); }
+    .sec-sub { color:var(--text-secondary); font-size:clamp(.93rem,1.6vw,1.05rem); font-weight:300; max-width:560px; margin:.7rem auto 0; }
+
+    .categories-grid {
+        display:grid;
+        grid-template-columns:repeat(auto-fill,minmax(clamp(220px,28vw,280px),1fr));
+        gap:clamp(1.25rem,2.5vw,2rem);
+    }
+    .cat-card {
+        background:var(--bg); border-radius:var(--radius);
+        box-shadow:var(--neu-out); padding:clamp(1.5rem,3vw,2.25rem);
+        cursor:pointer; transition:var(--transition); position:relative; overflow:hidden;
+        text-decoration:none; display:flex; flex-direction:column; gap:.9rem;
+    }
+    .cat-card::before {
+        content:''; position:absolute; top:0; left:0; bottom:0; width:0;
+        background:var(--cat-color, var(--gold));
+        transition:width .4s ease; opacity:.15; border-radius:var(--radius) 0 0 var(--radius);
+    }
+    .cat-card:hover { box-shadow:var(--neu-out-lg); transform:translateY(-4px); }
+    .cat-card:hover::before { width:5px; opacity:1; }
+    .cat-icon-wrap {
+        width:54px; height:54px; border-radius:var(--radius-sm);
+        background:var(--bg); box-shadow:var(--neu-sm);
+        display:flex; align-items:center; justify-content:center;
+        font-size:1.2rem; transition:var(--transition); flex-shrink:0;
+    }
+    .cat-card:hover .cat-icon-wrap { box-shadow:var(--neu-in-sm); }
+    .cat-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:700; line-height:1.2; color:var(--text-primary); }
+    .cat-card p { font-size:.82rem; color:var(--text-secondary); font-weight:300; line-height:1.65; flex:1; }
+    .cat-footer { display:flex; align-items:center; justify-content:space-between; }
+    .cat-count {
+        display:inline-flex; align-items:center; gap:.35rem;
+        padding:.22rem .7rem; border-radius:999px;
+        background:var(--bg); box-shadow:var(--neu-in-sm);
+        font-size:.72rem; font-weight:600; color:var(--text-muted);
+    }
+    .cat-arrow { font-size:.8rem; color:var(--gold); opacity:0; transform:translateX(-6px); transition:var(--transition); }
+    .cat-card:hover .cat-arrow { opacity:1; transform:translateX(0); }
+
+    /* ══ POPULAR ARTICLES SECTION ══ */
+    .popular-section {
+        position:relative; z-index:1;
+        background:var(--bg-dark);
+        padding:clamp(3rem,6vw,6rem) clamp(1rem,5vw,4rem);
+    }
+    .popular-inner { max-width:1300px; margin:0 auto; }
+    .articles-grid {
+        display:grid;
+        grid-template-columns:repeat(auto-fill,minmax(clamp(260px,32vw,360px),1fr));
+        gap:clamp(1.25rem,2.5vw,1.75rem);
+    }
+    .article-card {
+        background:var(--bg); border-radius:var(--radius);
+        box-shadow:var(--neu-out); padding:clamp(1.25rem,2.5vw,1.75rem);
+        cursor:pointer; transition:var(--transition); text-decoration:none;
+        display:flex; flex-direction:column; gap:.75rem;
+    }
+    .article-card:hover { box-shadow:var(--neu-out-lg); transform:translateY(-3px); }
+    .article-meta { display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; }
+    .article-cat-badge {
+        padding:.22rem .7rem; border-radius:999px;
+        font-size:.7rem; font-weight:600; letter-spacing:.06em;
+        text-transform:uppercase;
+        background:var(--bg); box-shadow:var(--neu-sm);
+    }
+    .article-time { font-size:.73rem; color:var(--text-muted); display:flex; align-items:center; gap:.3rem; }
+    .article-card h4 { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:700; line-height:1.25; color:var(--text-primary); }
+    .article-card p { font-size:.83rem; color:var(--text-secondary); font-weight:300; line-height:1.7; flex:1; }
+    .article-footer { display:flex; align-items:center; justify-content:space-between; margin-top:.25rem; }
+    .article-helpful { font-size:.75rem; color:var(--text-muted); display:flex; align-items:center; gap:.35rem; }
+    .article-helpful i { color:var(--sage); }
+    .read-more { font-size:.78rem; color:var(--gold); font-weight:600; display:flex; align-items:center; gap:.3rem; opacity:0; transition:var(--transition); }
+    .article-card:hover .read-more { opacity:1; }
+
+    /* ══ ARTICLE DETAIL PANEL (off-canvas) ══ */
+    .panel-overlay {
+        position:fixed; inset:0; z-index:2000;
+        background:rgba(45,37,24,.4);
+        opacity:0; pointer-events:none; transition:opacity .35s ease;
+    }
+    .panel-overlay.show { opacity:1; pointer-events:all; }
+    .article-panel {
+        position:fixed; top:0; right:-100%; height:100%;
+        width:min(92vw,600px);
+        background:var(--bg); z-index:2010;
+        box-shadow:-12px 0 40px rgba(0,0,0,.18);
+        transition:right .4s cubic-bezier(.4,0,.2,1);
+        display:flex; flex-direction:column; overflow:hidden;
+    }
+    .article-panel.show { right:0; }
+    .panel-header {
+        padding:1.5rem 1.75rem; display:flex; align-items:center; gap:1rem;
+        border-bottom:1px solid rgba(0,0,0,.07); flex-shrink:0;
+        background:var(--bg); box-shadow:0 2px 8px #c5bdb3;
+    }
+    .panel-close {
+        width:38px; height:38px; border-radius:50%; border:none;
+        background:var(--bg); box-shadow:var(--neu-sm);
+        display:flex; align-items:center; justify-content:center;
+        cursor:pointer; font-size:.9rem; color:var(--text-secondary);
+        transition:var(--transition); flex-shrink:0;
+    }
+    .panel-close:hover { box-shadow:var(--neu-press); color:var(--rose); }
+    .panel-title { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:700; flex:1; line-height:1.2; }
+    .panel-body { flex:1; overflow-y:auto; padding:1.75rem; }
+    .panel-body h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.4rem,3vw,1.9rem); font-weight:700; margin-bottom:1rem; line-height:1.15; }
+    .panel-body h2 em { font-style:italic; color:var(--gold); }
+    .panel-body .p-meta { display:flex; gap:.75rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+    .panel-body p { font-size:.9rem; color:var(--text-secondary); font-weight:300; line-height:1.85; margin-bottom:1rem; }
+    .panel-body h3 { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:700; margin:1.4rem 0 .6rem; color:var(--text-primary); }
+    .panel-body ul, .panel-body ol { padding-left:1.2rem; margin-bottom:1rem; }
+    .panel-body li { font-size:.9rem; color:var(--text-secondary); font-weight:300; line-height:1.8; margin-bottom:.3rem; }
+    .panel-body strong { color:var(--text-primary); font-weight:600; }
+    .panel-body a { color:var(--gold); text-decoration:none; }
+    .panel-body a:hover { text-decoration:underline; }
+    .panel-callout {
+        border-radius:var(--radius-sm); padding:1rem 1.2rem; margin:1rem 0;
+        box-shadow:var(--neu-in-sm); display:flex; gap:.8rem; align-items:flex-start;
+    }
+    .panel-callout i { font-size:.9rem; flex-shrink:0; margin-top:.18rem; }
+    .panel-callout p { margin:0 !important; font-size:.86rem !important; }
+    .p-callout-gold { border-left:3px solid var(--gold); } .p-callout-gold i { color:var(--gold); }
+    .p-callout-teal { border-left:3px solid var(--teal); } .p-callout-teal i { color:var(--teal); }
+    .p-callout-rose { border-left:3px solid var(--rose); } .p-callout-rose i { color:var(--rose); }
+    .panel-step {
+        display:flex; align-items:flex-start; gap:.85rem;
+        background:var(--bg); border-radius:var(--radius-sm);
+        box-shadow:var(--neu-sm); padding:.85rem 1rem; margin-bottom:.6rem;
+        transition:var(--transition);
+    }
+    .panel-step:hover { box-shadow:var(--neu-in-sm); }
+    .panel-step-num {
+        width:28px; height:28px; border-radius:50%; flex-shrink:0;
+        background:var(--bg); box-shadow:var(--neu-in-sm);
+        display:flex; align-items:center; justify-content:center;
+        font-family:'Cormorant Garamond',serif; font-size:.9rem; font-weight:700; color:var(--gold);
+    }
+    .panel-footer {
+        padding:1.25rem 1.75rem; border-top:1px solid rgba(0,0,0,.07);
+        flex-shrink:0; display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+    }
+    .panel-footer p { font-size:.82rem; color:var(--text-muted); flex:1; }
+    .helpful-btns { display:flex; gap:.5rem; }
+    .helpful-btn {
+        padding:.4rem .9rem; border-radius:var(--radius-xs); border:none;
+        background:var(--bg); box-shadow:var(--neu-sm);
+        font-family:'Jost',sans-serif; font-size:.78rem; font-weight:500;
+        cursor:pointer; display:flex; align-items:center; gap:.35rem;
+        transition:var(--transition); color:var(--text-secondary);
+    }
+    .helpful-btn:hover { box-shadow:var(--neu-press); }
+    .helpful-btn.yes:hover { color:var(--sage); }
+    .helpful-btn.no:hover  { color:var(--rose); }
+
+    /* ══ FAQ SECTION ══ */
+    .faq-section {
+        position:relative; z-index:1;
+        padding:clamp(3rem,6vw,6rem) clamp(1rem,5vw,4rem);
+        max-width:1300px; margin:0 auto;
+    }
+    .faq-layout { display:grid; grid-template-columns:1fr 1.4fr; gap:clamp(2rem,4vw,4rem); align-items:start; }
+    .faq-left { position:sticky; top:calc(var(--nav-h) + 2rem); }
+    .faq-left h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.9rem,4vw,3rem); font-weight:700; line-height:1.1; margin-bottom:1.1rem; }
+    .faq-left h2 em { font-style:italic; color:var(--gold); }
+    .faq-left p { font-size:.93rem; color:var(--text-secondary); font-weight:300; line-height:1.8; margin-bottom:1.75rem; }
+    .faq-cats { display:flex; flex-direction:column; gap:.5rem; }
+    .faq-cat-btn {
+        display:flex; align-items:center; gap:.75rem;
+        padding:.7rem 1rem; border-radius:var(--radius-sm); border:none;
+        background:var(--bg); box-shadow:var(--neu-sm);
+        color:var(--text-secondary); font-family:'Jost',sans-serif;
+        font-size:.85rem; font-weight:500; cursor:pointer; text-align:left;
+        transition:var(--transition); width:100%;
+    }
+    .faq-cat-btn i { width:16px; text-align:center; color:var(--gold); font-size:.9rem; }
+    .faq-cat-btn:hover { box-shadow:var(--neu-press); color:var(--gold); }
+    .faq-cat-btn.active { box-shadow:var(--neu-in-sm); color:var(--gold); font-weight:600; }
+    .faq-right { display:flex; flex-direction:column; gap:1rem; }
+    .faq-item {
+        background:var(--bg); border-radius:var(--radius);
+        box-shadow:var(--neu-out); overflow:hidden; transition:var(--transition);
+    }
+    .faq-item:hover { box-shadow:var(--neu-out-lg); }
+    .faq-q {
+        width:100%; background:none; border:none; cursor:pointer;
+        display:flex; align-items:center; justify-content:space-between;
+        gap:1rem; padding:clamp(1rem,2.5vw,1.4rem) clamp(1rem,2.5vw,1.4rem);
+        font-family:'Cormorant Garamond',serif;
+        font-size:clamp(1rem,1.8vw,1.15rem); font-weight:700;
+        color:var(--text-primary); text-align:left; transition:var(--transition);
+    }
+    .faq-q:hover { color:var(--gold); }
+    .faq-q-icon {
+        width:30px; height:30px; border-radius:50%; flex-shrink:0;
+        background:var(--bg); box-shadow:var(--neu-sm);
+        display:flex; align-items:center; justify-content:center;
+        font-size:.7rem; color:var(--gold); transition:var(--transition);
+    }
+    .faq-item.open .faq-q-icon { box-shadow:var(--neu-in-sm); transform:rotate(45deg); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height .45s ease; }
+    .faq-item.open .faq-a { max-height:500px; }
+    .faq-a-inner {
+        padding:0 clamp(1rem,2.5vw,1.4rem) clamp(1rem,2vw,1.25rem);
+        border-top:1px solid rgba(0,0,0,.05);
+    }
+    .faq-a-inner p { font-size:.88rem; color:var(--text-secondary); font-weight:300; line-height:1.8; padding-top:.9rem; margin:0; }
+    .faq-a-inner a { color:var(--gold); }
+
+    /* ══ STATUS SECTION ══ */
+    .status-section {
+        position:relative; z-index:1;
+        background:var(--bg-dark);
+        padding:clamp(3rem,5vw,5rem) clamp(1rem,5vw,4rem);
+    }
+    .status-inner { max-width:1000px; margin:0 auto; }
+    .status-header-row {
+        display:flex; align-items:center; justify-content:space-between;
+        flex-wrap:wrap; gap:1.5rem; margin-bottom:2.5rem;
+    }
+    .status-all-good {
+        display:flex; align-items:center; gap:.75rem;
+        padding:.65rem 1.4rem; border-radius:999px;
+        background:var(--bg); box-shadow:var(--neu-sm);
+        font-size:.85rem; font-weight:600; color:var(--sage);
+    }
+    .status-dot-green {
+        width:10px; height:10px; border-radius:50%; background:#5cb85c;
+        box-shadow:0 0 0 3px rgba(92,184,92,.2);
+        animation:pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot { 0%,100%{box-shadow:0 0 0 3px rgba(92,184,92,.2);} 50%{box-shadow:0 0 0 7px rgba(92,184,92,.08);} }
+    .status-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:1rem; }
+    .status-item {
+        background:var(--bg); border-radius:var(--radius);
+        box-shadow:var(--neu-out); padding:1.2rem 1.1rem;
+        text-align:center; transition:var(--transition);
+    }
+    .status-item:hover { box-shadow:var(--neu-press); }
+    .status-item-icon {
+        width:44px; height:44px; border-radius:50%; margin:0 auto .85rem;
+        background:var(--bg); box-shadow:var(--neu-sm);
+        display:flex; align-items:center; justify-content:center; font-size:1rem;
+    }
+    .status-item h5 { font-size:.82rem; font-weight:600; margin-bottom:.3rem; }
+    .status-badge {
+        display:inline-flex; align-items:center; gap:.3rem;
+        padding:.18rem .65rem; border-radius:999px;
+        font-size:.7rem; font-weight:600;
+    }
+    .status-ok   { background:rgba(92,184,92,.12); color:#4a8c4a; }
+    .status-warn { background:rgba(201,146,42,.12); color:var(--gold); }
+    .status-down { background:rgba(184,92,92,.12);  color:var(--rose); }
+    .uptime-bar {
+        display:flex; gap:2px; margin-top:.75rem; justify-content:center;
+    }
+    .uptime-day {
+        width:7px; height:20px; border-radius:2px;
+        background:#5cb85c; opacity:.7; transition:var(--transition);
+    }
+    .uptime-day.warn { background:var(--gold); }
+    .uptime-day:hover { opacity:1; transform:scaleY(1.15); }
+
+    /* ══ CONTACT SUPPORT SECTION ══ */
+    .support-section {
+        position:relative; z-index:1;
+        padding:clamp(3rem,6vw,6rem) clamp(1rem,5vw,4rem);
+        max-width:1300px; margin:0 auto;
+    }
+    .support-grid {
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(clamp(240px,28vw,300px),1fr));
+        gap:clamp(1.25rem,2.5vw,2rem);
+    }
+    .support-card {
+        background:var(--bg); border-radius:var(--radius);
+        box-shadow:var(--neu-out); padding:clamp(1.75rem,3.5vw,2.5rem);
+        display:flex; flex-direction:column; gap:1rem; transition:var(--transition);
+    }
+    .support-card:hover { box-shadow:var(--neu-out-lg); transform:translateY(-3px); }
+    .support-icon {
+        width:56px; height:56px; border-radius:var(--radius-sm);
+        background:var(--bg); box-shadow:var(--neu-sm);
+        display:flex; align-items:center; justify-content:center;
+        font-size:1.25rem; transition:var(--transition);
+    }
+    .support-card:hover .support-icon { box-shadow:var(--neu-in-sm); }
+    .support-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.25rem; font-weight:700; }
+    .support-card p { font-size:.88rem; color:var(--text-secondary); font-weight:300; line-height:1.75; flex:1; }
+    .support-badge {
+        display:inline-flex; align-items:center; gap:.4rem;
+        padding:.28rem .85rem; border-radius:999px;
+        background:var(--bg); box-shadow:var(--neu-in-sm);
+        font-size:.76rem; font-weight:600; color:var(--text-muted);
+    }
+    .support-badge i { color:var(--gold); font-size:.72rem; }
+    .support-cta {
+        display:inline-flex; align-items:center; gap:.5rem;
+        padding:.7rem 1.4rem; border-radius:var(--radius-sm); border:none;
+        background:var(--bg); box-shadow:var(--neu-sm);
+        color:var(--text-primary); font-family:'Jost',sans-serif;
+        font-size:.85rem; font-weight:500; text-decoration:none;
+        cursor:pointer; transition:var(--transition); margin-top:auto;
+    }
+    .support-cta:hover { box-shadow:var(--neu-press); color:var(--gold); }
+    .support-cta-gold {
+        background:linear-gradient(135deg,var(--gold),var(--gold-light));
+        box-shadow:5px 5px 14px #c0b097,-3px -3px 8px #ffffffcc; color:#fff; font-weight:600;
+    }
+    .support-cta-gold:hover { box-shadow:var(--neu-press); transform:scale(.98); }
+
+    /* ══ CTA BANNER ══ */
+    .cta-section { position:relative; z-index:1; padding:0 clamp(1rem,5vw,4rem) clamp(4rem,8vw,8rem); }
+    .cta-banner {
+        max-width:1260px; margin:0 auto;
+        background:var(--bg); border-radius:var(--radius-lg); box-shadow:var(--neu-out-xl);
+        padding:clamp(3rem,6vw,5rem) clamp(2rem,6vw,5rem);
+        text-align:center; position:relative; overflow:hidden;
+    }
+    .cta-banner::before {
+        content:''; position:absolute; inset:0; pointer-events:none;
+        background:radial-gradient(ellipse at 30% 50%,rgba(201,146,42,.06),transparent 60%),
+                    radial-gradient(ellipse at 70% 50%,rgba(61,139,133,.05),transparent 60%);
+    }
+    .cta-banner h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(1.9rem,4.5vw,3rem); font-weight:700; margin-bottom:1rem; position:relative; }
+    .cta-banner h2 em { font-style:italic; color:var(--gold); }
+    .cta-banner p { color:var(--text-secondary); font-size:1rem; font-weight:300; max-width:520px; margin:0 auto 2.5rem; position:relative; }
+    .cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; position:relative; }
+    .btn-gold {
+        display:inline-flex; align-items:center; gap:.5rem; padding:.9rem 2.2rem; border-radius:var(--radius);
+        background:linear-gradient(135deg,var(--gold),var(--gold-light));
+        box-shadow:6px 6px 18px #b8a075,-4px -4px 10px #ffffffaa;
+        color:#fff; font-family:'Jost',sans-serif; font-size:.95rem; font-weight:600;
+        text-decoration:none; border:none; cursor:pointer; transition:var(--transition);
+    }
+    .btn-gold:hover { box-shadow:var(--neu-press); transform:scale(.98); }
+    .btn-raised {
+        display:inline-flex; align-items:center; gap:.5rem; padding:.9rem 2.2rem; border-radius:var(--radius);
+        background:var(--bg); box-shadow:var(--neu-out); color:var(--text-primary);
+        font-family:'Jost',sans-serif; font-size:.95rem; font-weight:500;
+        text-decoration:none; border:none; cursor:pointer; transition:var(--transition);
+    }
+    .btn-raised:hover { box-shadow:var(--neu-press); }
+
+    /* ══ FOOTER ══ */
+    .footer { position:relative; z-index:1; background:var(--bg-dark); box-shadow:0 -4px 16px #c0b8ae; padding:clamp(3rem,6vw,5rem) clamp(1rem,5vw,4rem) 0; }
+    .footer-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:2fr repeat(3,1fr); gap:clamp(2rem,4vw,3rem); padding-bottom:clamp(2rem,4vw,3rem); }
+    .footer-brand .footer-logo { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:700; color:var(--gold); display:block; margin-bottom:.8rem; }
+    .footer-brand p { color:var(--text-secondary); font-size:.88rem; line-height:1.75; max-width:240px; margin-bottom:1.5rem; }
+    .footer-social { display:flex; gap:.6rem; }
+    .footer-social-btn { width:38px; height:38px; border-radius:var(--radius-sm); background:var(--bg); box-shadow:var(--neu-sm); display:flex; align-items:center; justify-content:center; color:var(--text-secondary); text-decoration:none; font-size:.9rem; transition:var(--transition); }
+    .footer-social-btn:hover { box-shadow:var(--neu-press); color:var(--gold); }
+    .footer-col h4 { font-size:.79rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--text-primary); margin-bottom:1.25rem; }
+    .footer-col ul { list-style:none; }
+    .footer-col ul li { margin-bottom:.65rem; }
+    .footer-col ul li a { color:var(--text-secondary); text-decoration:none; font-size:.88rem; font-weight:300; transition:var(--transition); }
+    .footer-col ul li a:hover { color:var(--gold); }
+    .footer-bottom { border-top:1px solid rgba(0,0,0,.07); padding:1.5rem 0; max-width:1200px; margin:0 auto; text-align:center; color:var(--text-muted); font-size:.82rem; }
+
+    /* ══ ANIMATIONS ══ */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .75s ease,transform .75s cubic-bezier(.25,.46,.45,.94); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .stagger > * { opacity:0; transform:translateY(20px); transition:opacity .5s ease,transform .5s ease; }
+    .stagger.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:.04s;}
+    .stagger.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:.1s;}
+    .stagger.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:.16s;}
+    .stagger.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:.22s;}
+    .stagger.visible > *:nth-child(5){opacity:1;transform:none;transition-delay:.28s;}
+    .stagger.visible > *:nth-child(6){opacity:1;transform:none;transition-delay:.34s;}
+    .stagger.visible > *:nth-child(7){opacity:1;transform:none;transition-delay:.40s;}
+    .stagger.visible > *:nth-child(8){opacity:1;transform:none;transition-delay:.46s;}
+
+    /* ══ RESPONSIVE ══ */
+    @media(max-width:900px){
+        .faq-layout{grid-template-columns:1fr;}
+        .faq-left{position:static;}
+        .faq-cats{flex-direction:row;flex-wrap:wrap;}
+        .faq-cat-btn{flex:1;min-width:130px;justify-content:center;}
+        .footer-inner{grid-template-columns:1fr 1fr;}
+        .footer-brand{grid-column:1/-1;}
+        .footer-brand p{max-width:100%;}
+    }
+    @media(max-width:768px){
+        .hamburger{display:flex;}
+        .nav-links-wrap{
+            position:fixed;top:0;right:-100%;
+            width:min(85vw,340px);height:100vh;
+            background:var(--bg);box-shadow:-8px 0 30px rgba(0,0,0,.1);
+            flex-direction:column;justify-content:center;align-items:flex-start;
+            padding:2.5rem 2rem;gap:1.5rem;
+            transition:right .4s cubic-bezier(.4,0,.2,1);z-index:1050;
+        }
+        .nav-links-wrap.active{right:0;}
+        .nav-links{flex-direction:column;gap:0;width:100%;}
+        .nav-links li{border-bottom:1px solid rgba(0,0,0,.06);}
+        .nav-link{display:block;padding:.9rem 0;font-size:1rem;}
+        .nav-actions{flex-direction:column;width:100%;gap:.75rem;}
+        .nav-btn{width:100%;justify-content:center;}
+        .article-panel{width:100%;right:-100%;}
+    }
+    @media(max-width:520px){
+        .cta-btns .btn-gold,.cta-btns .btn-raised{width:100%;justify-content:center;}
+        .footer-inner{grid-template-columns:1fr;}
+        .categories-grid{grid-template-columns:1fr 1fr;}
+        .search-btn{display:none;}
+        .search-box{padding:1rem 1.2rem 1rem 3rem;}
+    }
+    </style>
+</head>
+<body>
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">Aetheria</a>
+        <div class="nav-links-wrap" id="navWrap">
+            <ul class="nav-links">
+                <li><a href="index.html"         class="nav-link">Home</a></li>
+                <li><a href="index.html#catalog" class="nav-link">Catalog</a></li>
+                <li><a href="about.html"         class="nav-link">About</a></li>
+                <li><a href="contact.html"       class="nav-link">Contact</a></li>
+                <li><a href="help.html"          class="nav-link active">Help</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="index.html#catalog" class="nav-btn"><i class="fas fa-book-open"></i> Browse</a>
+                <a href="contact.html" class="nav-btn nav-btn-gold"><i class="fas fa-feather-alt"></i> Publish Free</a>
+            </div>
+        </div>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+<div id="overlay" onclick="toggleMenu()" style="display:none;position:fixed;inset:0;z-index:1040;background:rgba(0,0,0,.18);"></div>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero">
+    <div class="hero-deco" aria-hidden="true">HC</div>
+    <div class="hero-inner">
+        <div class="hero-chip"><i class="fas fa-life-ring"></i>&nbsp; Help Centre</div>
+        <h1 class="hero-title">How can we <em>help?</em></h1>
+        <p class="hero-sub">Find answers to your questions, learn how to publish your book, manage your account, and get the most out of Aetheria — all in one place.</p>
+
+        <!-- Search -->
+        <div class="search-wrap" id="searchWrap">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-box" id="searchBox" placeholder="Search for help… e.g. 'how to publish', 'reset password'" autocomplete="off" oninput="handleSearch(this.value)">
+            <button class="search-btn" onclick="triggerSearch()"><i class="fas fa-arrow-right"></i> Search</button>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+
+        <!-- Popular tags -->
+        <div class="popular-tags">
+            <button class="pop-tag" onclick="fillSearch('publish a book')">Publish a book</button>
+            <button class="pop-tag" onclick="fillSearch('reset password')">Reset password</button>
+            <button class="pop-tag" onclick="fillSearch('royalties')">Royalties</button>
+            <button class="pop-tag" onclick="fillSearch('delete account')">Delete account</button>
+            <button class="pop-tag" onclick="fillSearch('upload formats')">Upload formats</button>
+            <button class="pop-tag" onclick="fillSearch('copyright')">Copyright</button>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════ CATEGORIES ══════════════ -->
+<section class="categories-section reveal" id="categories">
+    <div class="sec-heading">
+        <div class="sec-tag"><i class="fas fa-th-large"></i>&nbsp; Browse by Topic</div>
+        <h2 class="sec-title">Help <em>Categories</em></h2>
+        <p class="sec-sub">Choose a category to explore all related guides and answers.</p>
+    </div>
+    <div class="categories-grid stagger">
+
+        <a class="cat-card" style="--cat-color:var(--gold);" onclick="showCategory('publishing')">
+            <div class="cat-icon-wrap" style="color:var(--gold);"><i class="fas fa-feather-alt"></i></div>
+            <h3>Publishing Your Book</h3>
+            <p>How to submit your manuscript, choose a cover, format chapters, and go live.</p>
+            <div class="cat-footer">
+                <span class="cat-count"><i class="fas fa-file-alt"></i> 14 articles</span>
+                <span class="cat-arrow"><i class="fas fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+        <a class="cat-card" style="--cat-color:var(--teal);" onclick="showCategory('account')">
+            <div class="cat-icon-wrap" style="color:var(--teal);"><i class="fas fa-user-circle"></i></div>
+            <h3>Account &amp; Profile</h3>
+            <p>Sign up, log in, reset passwords, edit your profile, and manage notifications.</p>
+            <div class="cat-footer">
+                <span class="cat-count"><i class="fas fa-file-alt"></i> 11 articles</span>
+                <span class="cat-arrow"><i class="fas fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+        <a class="cat-card" style="--cat-color:var(--amber);" onclick="showCategory('royalties')">
+            <div class="cat-icon-wrap" style="color:var(--amber);"><i class="fas fa-rupee-sign"></i></div>
+            <h3>Royalties &amp; Payments</h3>
+            <p>How royalties are calculated, when payments are made, and how to set up your bank account.</p>
+            <div class="cat-footer">
+                <span class="cat-count"><i class="fas fa-file-alt"></i> 9 articles</span>
+                <span class="cat-arrow"><i class="fas fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+        <a class="cat-card" style="--cat-color:var(--violet);" onclick="showCategory('reading')">
+            <div class="cat-icon-wrap" style="color:var(--violet);"><i class="fas fa-book-reader"></i></div>
+            <h3>Reading &amp; Discovery</h3>
+            <p>Browse the catalog, create reading lists, track your progress, and write reviews.</p>
+            <div class="cat-footer">
+                <span class="cat-count"><i class="fas fa-file-alt"></i> 8 articles</span>
+                <span class="cat-arrow"><i class="fas fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+        <a class="cat-card" style="--cat-color:var(--rose);" onclick="showCategory('safety')">
+            <div class="cat-icon-wrap" style="color:var(--rose);"><i class="fas fa-shield-alt"></i></div>
+            <h3>Safety &amp; Reporting</h3>
+            <p>Report harmful content, block users, understand content guidelines, and stay safe.</p>
+            <div class="cat-footer">
+                <span class="cat-count"><i class="fas fa-file-alt"></i> 7 articles</span>
+                <span class="cat-arrow"><i class="fas fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+        <a class="cat-card" style="--cat-color:var(--sage);" onclick="showCategory('technical')">
+            <div class="cat-icon-wrap" style="color:var(--sage);"><i class="fas fa-tools"></i></div>
+            <h3>Technical &amp; Formats</h3>
+            <p>Supported file types, formatting tips, cover dimensions, and troubleshooting uploads.</p>
+            <div class="cat-footer">
+                <span class="cat-count"><i class="fas fa-file-alt"></i> 12 articles</span>
+                <span class="cat-arrow"><i class="fas fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+        <a class="cat-card" style="--cat-color:var(--blue);" onclick="showCategory('copyright')">
+            <div class="cat-icon-wrap" style="color:var(--blue);"><i class="fas fa-copyright"></i></div>
+            <h3>Copyright &amp; Legal</h3>
+            <p>Who owns your work, DMCA requests, plagiarism policies, and publishing rights.</p>
+            <div class="cat-footer">
+                <span class="cat-count"><i class="fas fa-file-alt"></i> 6 articles</span>
+                <span class="cat-arrow"><i class="fas fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+        <a class="cat-card" style="--cat-color:var(--teal);" onclick="showCategory('editorial')">
+            <div class="cat-icon-wrap" style="color:var(--teal);"><i class="fas fa-pen-nib"></i></div>
+            <h3>Editorial &amp; Feedback</h3>
+            <p>How our optional editorial programme works, timelines, and how to use feedback.</p>
+            <div class="cat-footer">
+                <span class="cat-count"><i class="fas fa-file-alt"></i> 5 articles</span>
+                <span class="cat-arrow"><i class="fas fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+    </div>
+</section>
+
+<!-- ══════════════ POPULAR ARTICLES ══════════════ -->
+<section class="popular-section reveal" id="popular">
+    <div class="popular-inner">
+        <div class="sec-heading">
+            <div class="sec-tag"><i class="fas fa-fire"></i>&nbsp; Most Helpful</div>
+            <h2 class="sec-title">Popular <em>Articles</em></h2>
+            <p class="sec-sub">The guides our authors and readers find most useful.</p>
+        </div>
+        <div class="articles-grid stagger">
+
+            <a class="article-card" onclick="openArticle('publish-first-book')">
+                <div class="article-meta">
+                    <span class="article-cat-badge" style="color:var(--gold);">Publishing</span>
+                    <span class="article-time"><i class="fas fa-clock"></i> 5 min read</span>
+                </div>
+                <h4>How to Publish Your First Book on Aetheria</h4>
+                <p>A complete step-by-step walkthrough from account setup to your book going live — with screenshots and tips for first-time authors.</p>
+                <div class="article-footer">
+                    <span class="article-helpful"><i class="fas fa-thumbs-up"></i> 98% found helpful</span>
+                    <span class="read-more">Read <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a class="article-card" onclick="openArticle('reset-password')">
+                <div class="article-meta">
+                    <span class="article-cat-badge" style="color:var(--teal);">Account</span>
+                    <span class="article-time"><i class="fas fa-clock"></i> 2 min read</span>
+                </div>
+                <h4>How to Reset Your Password</h4>
+                <p>Forgot your password or locked out of your account? This guide walks you through the recovery steps.</p>
+                <div class="article-footer">
+                    <span class="article-helpful"><i class="fas fa-thumbs-up"></i> 96% found helpful</span>
+                    <span class="read-more">Read <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a class="article-card" onclick="openArticle('royalties-explained')">
+                <div class="article-meta">
+                    <span class="article-cat-badge" style="color:var(--amber);">Royalties</span>
+                    <span class="article-time"><i class="fas fa-clock"></i> 6 min read</span>
+                </div>
+                <h4>How Royalties Are Calculated &amp; Paid</h4>
+                <p>A transparent breakdown of how we calculate page-reads, pool distributions, and when your money arrives.</p>
+                <div class="article-footer">
+                    <span class="article-helpful"><i class="fas fa-thumbs-up"></i> 94% found helpful</span>
+                    <span class="read-more">Read <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a class="article-card" onclick="openArticle('file-formats')">
+                <div class="article-meta">
+                    <span class="article-cat-badge" style="color:var(--sage);">Technical</span>
+                    <span class="article-time"><i class="fas fa-clock"></i> 3 min read</span>
+                </div>
+                <h4>Supported File Formats &amp; Upload Requirements</h4>
+                <p>Everything you need to know about DOCX, PDF, and EPUB uploads — file size limits, resolution specs, and common errors.</p>
+                <div class="article-footer">
+                    <span class="article-helpful"><i class="fas fa-thumbs-up"></i> 92% found helpful</span>
+                    <span class="read-more">Read <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a class="article-card" onclick="openArticle('delete-book')">
+                <div class="article-meta">
+                    <span class="article-cat-badge" style="color:var(--gold);">Publishing</span>
+                    <span class="article-time"><i class="fas fa-clock"></i> 2 min read</span>
+                </div>
+                <h4>How to Unpublish or Delete Your Book</h4>
+                <p>Removing your work from Aetheria is straightforward. This guide explains how and what happens to your data afterward.</p>
+                <div class="article-footer">
+                    <span class="article-helpful"><i class="fas fa-thumbs-up"></i> 91% found helpful</span>
+                    <span class="read-more">Read <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a class="article-card" onclick="openArticle('copyright-ownership')">
+                <div class="article-meta">
+                    <span class="article-cat-badge" style="color:var(--blue);">Legal</span>
+                    <span class="article-time"><i class="fas fa-clock"></i> 4 min read</span>
+                </div>
+                <h4>Do I Own My Book After Publishing on Aetheria?</h4>
+                <p>Short answer: yes. This article explains what rights you retain, what licence you grant us, and what that means in practice.</p>
+                <div class="article-footer">
+                    <span class="article-helpful"><i class="fas fa-thumbs-up"></i> 99% found helpful</span>
+                    <span class="read-more">Read <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════ FAQ ══════════════ -->
+<section class="faq-section reveal" id="faq">
+    <div class="faq-layout">
+        <!-- Left sticky -->
+        <div class="faq-left">
+            <div class="sec-tag"><i class="fas fa-question-circle"></i>&nbsp; FAQ</div>
+            <h2>Common <em>Questions</em></h2>
+            <p>Can't find what you're looking for above? Browse questions by category.</p>
+            <div class="faq-cats">
+                <button class="faq-cat-btn active" onclick="filterFaq('all', this)"><i class="fas fa-th"></i> All</button>
+                <button class="faq-cat-btn" onclick="filterFaq('publishing', this)"><i class="fas fa-feather-alt"></i> Publishing</button>
+                <button class="faq-cat-btn" onclick="filterFaq('account', this)"><i class="fas fa-user"></i> Account</button>
+                <button class="faq-cat-btn" onclick="filterFaq('payment', this)"><i class="fas fa-rupee-sign"></i> Payments</button>
+                <button class="faq-cat-btn" onclick="filterFaq('legal', this)"><i class="fas fa-gavel"></i> Legal</button>
+                <button class="faq-cat-btn" onclick="filterFaq('technical', this)"><i class="fas fa-tools"></i> Technical</button>
+            </div>
+        </div>
+
+        <!-- Right accordion -->
+        <div class="faq-right" id="faqList">
+
+            <div class="faq-item" data-cat="publishing">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    Is publishing on Aetheria really free — no hidden charges?
+                    <div class="faq-q-icon"><i class="fas fa-plus"></i></div>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    <p>Yes, 100% free, forever. There are no submission fees, hosting fees, listing fees, or commissions on free-tier reading. The only optional paid element is the author royalty programme, which you can opt into if you want to earn from premium reader subscriptions — but this is entirely your choice. Basic publishing will always remain free.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-cat="publishing">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    How long does it take for my book to go live?
+                    <div class="faq-q-icon"><i class="fas fa-plus"></i></div>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    <p>If you skip the optional editorial review, your book goes live within <strong>48 hours</strong> of submission. If you opt into editorial feedback, that takes up to 14 days. You can check your submission status at any time from your author dashboard.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-cat="publishing">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    Can I publish in Telugu, Tamil, Hindi, or other Indian languages?
+                    <div class="faq-q-icon"><i class="fas fa-plus"></i></div>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    <p>Absolutely! We actively support publishing in all major Indian languages including Telugu, Tamil, Hindi, Malayalam, Kannada, Bengali, Marathi, Gujarati, Odia, and Punjabi, as well as English and many international languages. Our platform is designed to celebrate India's rich literary diversity.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-cat="publishing">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    Can I publish my book on Amazon, Wattpad, or other platforms too?
+                    <div class="faq-q-icon"><i class="fas fa-plus"></i></div>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    <p>Yes — we do not require exclusivity. You are free to publish the same work on any other platform simultaneously. The limited licence you grant us only covers displaying your work on Aetheria; it does not restrict you from publishing elsewhere.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-cat="account">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    I forgot my password. How do I recover my account?
+                    <div class="faq-q-icon"><i class="fas fa-plus"></i></div>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    <p>Click <strong>"Forgot Password"</strong> on the login page and enter your registered email. You'll receive a reset link within 5 minutes. If it doesn't arrive, check your spam folder or contact us at <a href="mailto:hello@aetheria.pub">hello@aetheria.pub</a>. The reset link expires after 1 hour for security.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-cat="account">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    How do I delete my Aetheria account?
+                    <div class="faq-q-icon"><i class="fas fa-plus"></i></div>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    <p>Go to <strong>Settings → Account → Delete Account</strong>. Your published books will be unpublished within 48 hours and your personal data deleted within 30 days. Any pending royalties will be paid in the next payment cycle. This action is irreversible — please download your manuscripts first.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-cat="payment">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    When do I get paid, and what's the minimum payout?
+                    <div class="faq-q-icon"><i class="fas fa-plus"></i></div>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    <p>Royalties are paid <strong>monthly by the 15th</strong> of the following month for the previous month's earnings. The minimum payout threshold is ₹500 INR (or equivalent for international authors). Amounts below this roll over to the next month. Payment methods include Razorpay (India) and Stripe (international).</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-cat="payment">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    I haven't received my royalty payment. What should I do?
+                    <div class="faq-q-icon"><i class="fas fa-plus"></i></div>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    <p>First, check that your bank account details in your author dashboard are correct and verified. Payments can sometimes take 3–5 business days to clear after we initiate them. If you still haven't received payment after the 20th of the month, contact us at <a href="mailto:payments@aetheria.pub">payments@aetheria.pub</a> with your account username and the relevant payment period.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-cat="legal">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    Do I keep copyright over my book after publishing on Aetheria?
+                    <div class="faq-q-icon"><i class="fas fa-plus"></i></div>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    <p>Yes — you retain 100% of your intellectual property rights. Publishing on Aetheria grants us only a limited, non-exclusive licence to host and display your work on our platform. We cannot sell your work, claim authorship, or restrict you from publishing elsewhere. See our <a href="terms.html">Terms of Service §05</a> for full details.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-cat="legal">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    Someone has uploaded my copyrighted work without permission. What can I do?
+                    <div class="faq-q-icon"><i class="fas fa-plus"></i></div>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    <p>Send a DMCA takedown notice to <a href="mailto:legal@aetheria.pub">legal@aetheria.pub</a> with: (1) identification of your copyrighted work, (2) the URL of the infringing content, (3) your contact details, and (4) a statement of good faith belief and accuracy. We will review within 5 business days and remove confirmed infringements within 48 hours.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-cat="technical">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    My manuscript file was rejected on upload. Why?
+                    <div class="faq-q-icon"><i class="fas fa-plus"></i></div>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    <p>The most common reasons are: file size exceeds 50 MB, unsupported format (we accept DOCX, PDF, EPUB, ODT only), password-protected files, or files containing embedded executable scripts. Try saving your document as a fresh DOCX or PDF without macros or password protection. If the problem persists, email the file to <a href="mailto:help@aetheria.pub">help@aetheria.pub</a>.</p>
+                </div></div>
+            </div>
+
+            <div class="faq-item" data-cat="technical">
+                <button class="faq-q" onclick="toggleFaq(this)">
+                    What are the cover image requirements?
+                    <div class="faq-q-icon"><i class="fas fa-plus"></i></div>
+                </button>
+                <div class="faq-a"><div class="faq-a-inner">
+                    <p>Cover images should be <strong>1600 × 2400 px</strong> (2:3 ratio), JPG or PNG, minimum 300 DPI, and under 10 MB. We strongly recommend using this exact size to ensure your cover looks great across all devices. Free cover templates are available in your author dashboard if you don't have one.</p>
+                </div></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════ STATUS ══════════════ -->
+<section class="status-section reveal" id="status">
+    <div class="status-inner">
+        <div class="status-header-row">
+            <div>
+                <div class="sec-tag" style="margin-bottom:.7rem;"><i class="fas fa-server"></i>&nbsp; System Status</div>
+                <h2 class="sec-title" style="font-size:clamp(1.5rem,3vw,2.2rem);">All Systems <em>Operational</em></h2>
+            </div>
+            <div class="status-all-good">
+                <div class="status-dot-green"></div> All services running normally
+            </div>
+        </div>
+        <div class="status-grid stagger">
+            <div class="status-item">
+                <div class="status-item-icon" style="color:var(--gold);"><i class="fas fa-globe"></i></div>
+                <h5>Website</h5>
+                <div class="status-badge status-ok"><i class="fas fa-check-circle"></i> Operational</div>
+                <div class="uptime-bar" title="90-day uptime">
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day warn"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                </div>
+            </div>
+            <div class="status-item">
+                <div class="status-item-icon" style="color:var(--teal);"><i class="fas fa-upload"></i></div>
+                <h5>Book Uploads</h5>
+                <div class="status-badge status-ok"><i class="fas fa-check-circle"></i> Operational</div>
+                <div class="uptime-bar">
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                </div>
+            </div>
+            <div class="status-item">
+                <div class="status-item-icon" style="color:var(--violet);"><i class="fas fa-book-open"></i></div>
+                <h5>Reading Platform</h5>
+                <div class="status-badge status-ok"><i class="fas fa-check-circle"></i> Operational</div>
+                <div class="uptime-bar">
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                </div>
+            </div>
+            <div class="status-item">
+                <div class="status-item-icon" style="color:var(--amber);"><i class="fas fa-rupee-sign"></i></div>
+                <h5>Payments</h5>
+                <div class="status-badge status-ok"><i class="fas fa-check-circle"></i> Operational</div>
+                <div class="uptime-bar">
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day warn"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                </div>
+            </div>
+            <div class="status-item">
+                <div class="status-item-icon" style="color:var(--sage);"><i class="fas fa-envelope"></i></div>
+                <h5>Email Delivery</h5>
+                <div class="status-badge status-ok"><i class="fas fa-check-circle"></i> Operational</div>
+                <div class="uptime-bar">
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                </div>
+            </div>
+            <div class="status-item">
+                <div class="status-item-icon" style="color:var(--blue);"><i class="fas fa-search"></i></div>
+                <h5>Search Index</h5>
+                <div class="status-badge status-ok"><i class="fas fa-check-circle"></i> Operational</div>
+                <div class="uptime-bar">
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                    <div class="uptime-day"></div><div class="uptime-day"></div><div class="uptime-day"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════ CONTACT SUPPORT ══════════════ -->
+<section class="support-section reveal" id="contact-support">
+    <div class="sec-heading">
+        <div class="sec-tag"><i class="fas fa-headset"></i>&nbsp; Still Need Help?</div>
+        <h2 class="sec-title">Contact <em>Support</em></h2>
+        <p class="sec-sub">Can't find your answer? Our team reads every message personally and responds fast.</p>
+    </div>
+    <div class="support-grid stagger">
+
+        <div class="support-card">
+            <div class="support-icon" style="color:var(--gold);"><i class="fas fa-envelope"></i></div>
+            <h3>Email Support</h3>
+            <p>Send us a detailed message and we'll respond within 24 hours on business days. Best for non-urgent questions and account issues.</p>
+            <div class="support-badge"><i class="fas fa-clock"></i> Avg reply: 6 hours</div>
+            <a href="contact.html" class="support-cta support-cta-gold"><i class="fas fa-paper-plane"></i> Send a Message</a>
+        </div>
+
+        <div class="support-card">
+            <div class="support-icon" style="color:var(--teal);"><i class="fab fa-whatsapp"></i></div>
+            <h3>WhatsApp Chat</h3>
+            <p>Prefer a quick chat? Reach us on WhatsApp for faster responses on publishing questions, account support, and general help.</p>
+            <div class="support-badge"><i class="fas fa-clock"></i> Mon–Fri 9AM–6PM IST</div>
+            <a href="https://wa.me/919999888877" target="_blank" class="support-cta"><i class="fab fa-whatsapp"></i> Open WhatsApp</a>
+        </div>
+
+        <div class="support-card">
+            <div class="support-icon" style="color:var(--violet);"><i class="fas fa-users"></i></div>
+            <h3>Author Community</h3>
+            <p>Connect with fellow Aetheria authors in our community forum. Ask questions, share tips, and get peer advice from experienced writers.</p>
+            <div class="support-badge"><i class="fas fa-users"></i> 2,400+ members</div>
+            <a href="#" class="support-cta"><i class="fas fa-external-link-alt"></i> Join Community</a>
+        </div>
+
+        <div class="support-card">
+            <div class="support-icon" style="color:var(--amber);"><i class="fas fa-rupee-sign"></i></div>
+            <h3>Payments Team</h3>
+            <p>For royalty disputes, payment setup issues, or tax documentation — our dedicated payments team handles these separately for faster resolution.</p>
+            <div class="support-badge"><i class="fas fa-clock"></i> Reply within 48 hours</div>
+            <a href="mailto:payments@aetheria.pub" class="support-cta"><i class="fas fa-envelope"></i> payments@aetheria.pub</a>
+        </div>
+
+        <div class="support-card">
+            <div class="support-icon" style="color:var(--rose);"><i class="fas fa-gavel"></i></div>
+            <h3>Legal &amp; Copyright</h3>
+            <p>DMCA notices, copyright claims, terms disputes, and legal correspondence should be directed to our legal team for prompt handling.</p>
+            <div class="support-badge"><i class="fas fa-clock"></i> Reply within 5 business days</div>
+            <a href="mailto:legal@aetheria.pub" class="support-cta"><i class="fas fa-envelope"></i> legal@aetheria.pub</a>
+        </div>
+
+        <div class="support-card">
+            <div class="support-icon" style="color:var(--blue);"><i class="fas fa-lock"></i></div>
+            <h3>Security Reports</h3>
+            <p>Found a vulnerability or security issue? Please disclose it responsibly to our security team. We review all reports within 48 hours.</p>
+            <div class="support-badge"><i class="fas fa-shield-alt"></i> Responsible disclosure</div>
+            <a href="mailto:security@aetheria.pub" class="support-cta"><i class="fas fa-envelope"></i> security@aetheria.pub</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ══════════════ CTA ══════════════ -->
+<div class="cta-section reveal">
+    <div class="cta-banner">
+        <h2>Ready to share your <em>story?</em></h2>
+        <p>Publishing on Aetheria is free, instant, and gives you complete control over your work and your readers.</p>
+        <div class="cta-btns">
+            <a href="contact.html" class="btn-gold"><i class="fas fa-feather-alt"></i> Start Publishing Free</a>
+            <a href="index.html#catalog" class="btn-raised"><i class="fas fa-book-open"></i> Explore Books</a>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <span class="footer-logo">Aetheria Publishing</span>
+            <p>Curators of literary excellence since 2020. Making great stories accessible to everyone, everywhere — always free for authors.</p>
+            <div class="footer-social">
+                <a href="#" class="footer-social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="footer-social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="footer-social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="footer-social-btn" aria-label="Goodreads"><i class="fab fa-goodreads"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Platform</h4>
+            <ul>
+                <li><a href="index.html#catalog">Browse Catalog</a></li>
+                <li><a href="contact.html">Publish a Book</a></li>
+                <li><a href="#">Reading Lists</a></li>
+                <li><a href="#">Author Dashboard</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="about.html#team">Our Team</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Support</h4>
+            <ul>
+                <li><a href="help.html">Help Centre</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Aetheria Publishing. All rights reserved. — Publishing should be free. Stories should be heard.</p>
+    </div>
+</footer>
+
+<!-- ══════════════ ARTICLE PANEL ══════════════ -->
+<div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+<div class="article-panel" id="articlePanel">
+    <div class="panel-header">
+        <button class="panel-close" onclick="closePanel()"><i class="fas fa-times"></i></button>
+        <div class="panel-title" id="panelTitle">Article</div>
+    </div>
+    <div class="panel-body" id="panelBody"></div>
+    <div class="panel-footer">
+        <p>Was this article helpful?</p>
+        <div class="helpful-btns">
+            <button class="helpful-btn yes" onclick="markHelpful(true)"><i class="fas fa-thumbs-up"></i> Yes</button>
+            <button class="helpful-btn no"  onclick="markHelpful(false)"><i class="fas fa-thumbs-down"></i> No</button>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ══ MOBILE MENU ══ */
+function toggleMenu() {
+    const w=document.getElementById('navWrap'), h=document.getElementById('hamburger'), o=document.getElementById('overlay');
+    const open=w.classList.toggle('active');
+    h.classList.toggle('active',open); o.style.display=open?'block':'none';
+    document.body.style.overflow=open?'hidden':'';
+}
+document.querySelectorAll('.nav-link').forEach(l=>l.addEventListener('click',()=>{
+    if(document.getElementById('navWrap').classList.contains('active')) toggleMenu();
+}));
+
+/* ══ SCROLL REVEAL ══ */
+const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} });
+},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.stagger').forEach(el=>io.observe(el));
+
+/* ══ SEARCH ══ */
+const searchData = [
+    {title:'How to Publish Your First Book', cat:'Publishing', id:'publish-first-book', keywords:['publish','book','first','submit','upload','manuscript']},
+    {title:'How to Reset Your Password',     cat:'Account',   id:'reset-password',      keywords:['password','reset','forgot','locked','login','sign in']},
+    {title:'How Royalties Are Calculated',   cat:'Royalties', id:'royalties-explained', keywords:['royalty','royalties','payment','earn','money','paid']},
+    {title:'Supported File Formats',         cat:'Technical', id:'file-formats',        keywords:['file','format','docx','pdf','epub','upload','size']},
+    {title:'How to Unpublish or Delete Your Book', cat:'Publishing', id:'delete-book',  keywords:['delete','remove','unpublish','takedown','book']},
+    {title:'Do I Own My Book After Publishing?',   cat:'Legal',     id:'copyright-ownership', keywords:['copyright','own','rights','ownership','licence']},
+    {title:'How to Change Your Email Address',     cat:'Account',   id:'change-email',   keywords:['email','change','update','address','account']},
+    {title:'Cover Image Requirements',             cat:'Technical', id:'cover-specs',    keywords:['cover','image','dimensions','size','jpg','png']},
+    {title:'How to Set Up Bank Account for Royalties', cat:'Payments', id:'bank-setup',  keywords:['bank','account','payout','payment','razorpay']},
+    {title:'How to Report Plagiarism',             cat:'Legal',     id:'report-plagiarism', keywords:['plagiarism','dmca','copyright','stolen','report']},
+    {title:'How to Write a Good Author Bio',       cat:'Publishing',id:'author-bio',     keywords:['bio','profile','author','about','description']},
+    {title:'How to Enable Two-Factor Authentication', cat:'Account', id:'two-factor',    keywords:['2fa','two factor','security','authenticator']},
+];
+
+function handleSearch(val) {
+    const box=document.getElementById('searchResults');
+    if(!val.trim()){ box.classList.remove('show'); return; }
+    const q=val.toLowerCase();
+    const hits=searchData.filter(s=>s.keywords.some(k=>k.includes(q))||s.title.toLowerCase().includes(q));
+    if(!hits.length){ box.innerHTML=`<div class="sr-none">No results for "<strong>${val}</strong>" — try different keywords.</div>`; box.classList.add('show'); return; }
+    box.innerHTML=hits.slice(0,6).map(h=>`
+        <a class="sr-item" onclick="openArticle('${h.id}');document.getElementById('searchResults').classList.remove('show');">
+            <i class="fas fa-file-alt"></i>
+            <span>${h.title} <strong style="font-size:.72rem;color:var(--text-muted);font-weight:400;"> — ${h.cat}</strong></span>
+        </a>`).join('');
+    box.classList.add('show');
+}
+function triggerSearch(){ handleSearch(document.getElementById('searchBox').value); }
+function fillSearch(val){ document.getElementById('searchBox').value=val; handleSearch(val); document.getElementById('searchBox').focus(); }
+document.addEventListener('click',e=>{ if(!document.getElementById('searchWrap').contains(e.target)) document.getElementById('searchResults').classList.remove('show'); });
+
+/* ══ ARTICLE PANEL CONTENT ══ */
+const articles = {
+    'publish-first-book': {
+        title:'How to Publish Your First Book on Aetheria',
+        body:`
+        <h2>How to Publish Your <em>First Book</em></h2>
+        <div class="p-meta">
+            <span class="article-cat-badge" style="color:var(--gold);box-shadow:var(--neu-sm);padding:.22rem .8rem;border-radius:999px;font-size:.72rem;font-weight:600;">Publishing</span>
+            <span style="font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:.3rem;"><i class="fas fa-clock"></i> 5 min read</span>
+        </div>
+        <p>Publishing your first book on Aetheria is a straightforward process that takes less than 10 minutes. Here's everything you need to get started.</p>
+        <h3>Before You Begin</h3>
+        <p>Make sure you have the following ready:</p>
+        <ul>
+            <li>Your manuscript in DOCX, PDF, EPUB, or ODT format (max 50 MB)</li>
+            <li>A cover image (1600 × 2400 px JPG/PNG recommended)</li>
+            <li>A book title, description (200–500 words), and genre tags</li>
+            <li>A verified Aetheria author account</li>
+        </ul>
+        <h3>Step-by-Step Guide</h3>
+        <div class="panel-step"><div class="panel-step-num">1</div><p><strong>Log in</strong> to your author dashboard at aetheria.pub/dashboard</p></div>
+        <div class="panel-step"><div class="panel-step-num">2</div><p>Click <strong>"Publish New Book"</strong> in the top right corner of your dashboard.</p></div>
+        <div class="panel-step"><div class="panel-step-num">3</div><p>Fill in your book details: <strong>title, description, language, genre, and age rating</strong>.</p></div>
+        <div class="panel-step"><div class="panel-step-num">4</div><p><strong>Upload your manuscript</strong> file. The system will validate the format automatically.</p></div>
+        <div class="panel-step"><div class="panel-step-num">5</div><p><strong>Upload your cover image</strong> or choose from our free template library.</p></div>
+        <div class="panel-step"><div class="panel-step-num">6</div><p>Choose whether to opt into <strong>editorial review</strong> (optional, adds 7–14 days).</p></div>
+        <div class="panel-step"><div class="panel-step-num">7</div><p>Click <strong>"Submit for Publishing"</strong>. You'll receive an email confirmation.</p></div>
+        <div class="panel-callout p-callout-teal">
+            <i class="fas fa-check-circle"></i>
+            <p>Your book will be live within <strong>48 hours</strong> if you skip editorial review. You can track submission status in your dashboard at any time.</p>
+        </div>
+        <h3>Tips for a Great First Submission</h3>
+        <ul>
+            <li>Write a compelling description — it's the first thing readers see.</li>
+            <li>Choose 3–5 relevant genre tags to help readers discover your work.</li>
+            <li>A professional cover significantly increases click-through rates.</li>
+            <li>Proofread once more before submitting — you can update your manuscript after publishing, but first impressions matter.</li>
+        </ul>`
+    },
+    'reset-password': {
+        title:'How to Reset Your Password',
+        body:`
+        <h2>How to Reset Your <em>Password</em></h2>
+        <div class="p-meta">
+            <span class="article-cat-badge" style="color:var(--teal);box-shadow:var(--neu-sm);padding:.22rem .8rem;border-radius:999px;font-size:.72rem;font-weight:600;">Account</span>
+            <span style="font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:.3rem;"><i class="fas fa-clock"></i> 2 min read</span>
+        </div>
+        <p>Forgot your password? No problem. Follow these steps to regain access to your account securely.</p>
+        <h3>Reset via Email</h3>
+        <div class="panel-step"><div class="panel-step-num">1</div><p>Go to the <strong>Login page</strong> at aetheria.pub/login</p></div>
+        <div class="panel-step"><div class="panel-step-num">2</div><p>Click <strong>"Forgot Password?"</strong> below the login form.</p></div>
+        <div class="panel-step"><div class="panel-step-num">3</div><p>Enter your <strong>registered email address</strong> and click Send Reset Link.</p></div>
+        <div class="panel-step"><div class="panel-step-num">4</div><p>Check your inbox for an email from <strong>noreply@aetheria.pub</strong>. It arrives within 5 minutes.</p></div>
+        <div class="panel-step"><div class="panel-step-num">5</div><p>Click the link in the email and set a <strong>new strong password</strong> (min. 8 characters).</p></div>
+        <div class="panel-callout p-callout-gold">
+            <i class="fas fa-info-circle"></i>
+            <p>Reset links expire after <strong>1 hour</strong> for security. If yours has expired, simply start the process again.</p>
+        </div>
+        <h3>Didn't Receive the Email?</h3>
+        <ul>
+            <li>Check your spam or junk folder.</li>
+            <li>Make sure you're using the same email you registered with.</li>
+            <li>Add noreply@aetheria.pub to your safe-senders list.</li>
+            <li>If you still can't access your account, contact us at <a href="mailto:hello@aetheria.pub">hello@aetheria.pub</a>.</li>
+        </ul>
+        <div class="panel-callout p-callout-rose">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>Aetheria will <strong>never</strong> ask for your password via email, phone, or chat. If you receive such a request, it is fraudulent — report it to <a href="mailto:security@aetheria.pub">security@aetheria.pub</a>.</p>
+        </div>`
+    },
+    'royalties-explained': {
+        title:'How Royalties Are Calculated & Paid',
+        body:`
+        <h2>How Royalties Are <em>Calculated &amp; Paid</em></h2>
+        <div class="p-meta">
+            <span class="article-cat-badge" style="color:var(--amber);box-shadow:var(--neu-sm);padding:.22rem .8rem;border-radius:999px;font-size:.72rem;font-weight:600;">Royalties</span>
+            <span style="font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:.3rem;"><i class="fas fa-clock"></i> 6 min read</span>
+        </div>
+        <p>Our royalty programme lets authors earn money from their free books through premium reader subscriptions. Here's exactly how it works.</p>
+        <h3>The Royalty Pool</h3>
+        <p><strong>70%</strong> of all net premium subscription revenue is allocated to the author royalty pool each month. The pool is then distributed proportionally based on qualifying page-reads.</p>
+        <div class="panel-callout p-callout-gold">
+            <i class="fas fa-calculator"></i>
+            <p><strong>Your royalty = (Your page-reads ÷ Total platform page-reads) × Monthly pool</strong></p>
+        </div>
+        <h3>What Counts as a Page-Read?</h3>
+        <ul>
+            <li>A page-read is counted when a <strong>premium subscriber</strong> reads a Kindle-Unlimited-equivalent page of your book.</li>
+            <li>Page-reads from free readers do <strong>not</strong> count towards royalties.</li>
+            <li>Re-reads of the same page within the same session are de-duplicated.</li>
+            <li>Only books that have been live for at least 30 days qualify.</li>
+        </ul>
+        <h3>Payment Schedule</h3>
+        <ul>
+            <li>Royalties are calculated on the <strong>last day of each month</strong>.</li>
+            <li>Payments are made by the <strong>15th of the following month</strong>.</li>
+            <li>Minimum payout is <strong>₹500 INR</strong>. Amounts below roll over.</li>
+            <li>Payments via <strong>Razorpay</strong> (India) or <strong>Stripe</strong> (international).</li>
+        </ul>
+        <h3>Opting In</h3>
+        <p>Go to <strong>Dashboard → Earnings → Enable Royalty Programme</strong>. You'll need to verify your identity and add a bank account or payment method before earnings can be released.</p>`
+    },
+    'file-formats': {
+        title:'Supported File Formats & Upload Requirements',
+        body:`
+        <h2>Supported File Formats &amp; <em>Upload Requirements</em></h2>
+        <div class="p-meta">
+            <span class="article-cat-badge" style="color:var(--sage);box-shadow:var(--neu-sm);padding:.22rem .8rem;border-radius:999px;font-size:.72rem;font-weight:600;">Technical</span>
+            <span style="font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:.3rem;"><i class="fas fa-clock"></i> 3 min read</span>
+        </div>
+        <h3>Accepted Manuscript Formats</h3>
+        <ul>
+            <li><strong>DOCX</strong> — Microsoft Word (recommended for best formatting control)</li>
+            <li><strong>PDF</strong> — Portable Document Format (ensure text is selectable, not image-only)</li>
+            <li><strong>EPUB</strong> — Electronic publication format (ideal if you've already formatted your book)</li>
+            <li><strong>ODT</strong> — OpenDocument Text (LibreOffice, Google Docs export)</li>
+        </ul>
+        <div class="panel-callout p-callout-rose">
+            <i class="fas fa-times-circle"></i>
+            <p><strong>Not accepted:</strong> .exe, .zip, .rar, password-protected files, files with embedded macros or scripts, image-only PDFs (scanned without OCR), or files over 50 MB.</p>
+        </div>
+        <h3>Cover Image Specs</h3>
+        <ul>
+            <li><strong>Dimensions:</strong> 1600 × 2400 px (2:3 portrait ratio)</li>
+            <li><strong>Format:</strong> JPG or PNG</li>
+            <li><strong>Resolution:</strong> 300 DPI minimum</li>
+            <li><strong>File size:</strong> Maximum 10 MB</li>
+            <li><strong>Colour mode:</strong> RGB (not CMYK)</li>
+        </ul>
+        <h3>Common Upload Errors</h3>
+        <ul>
+            <li><strong>"File too large"</strong> — Compress images inside DOCX or split into multiple uploads.</li>
+            <li><strong>"Unsupported format"</strong> — Re-save as DOCX from Word or export as EPUB from your editor.</li>
+            <li><strong>"File appears corrupted"</strong> — Re-open and re-save the file; avoid uploading directly from cloud drives.</li>
+            <li><strong>"Password protected"</strong> — Remove document password before uploading.</li>
+        </ul>`
+    },
+    'delete-book': {
+        title:'How to Unpublish or Delete Your Book',
+        body:`
+        <h2>How to Unpublish or <em>Delete Your Book</em></h2>
+        <div class="p-meta">
+            <span class="article-cat-badge" style="color:var(--gold);box-shadow:var(--neu-sm);padding:.22rem .8rem;border-radius:999px;font-size:.72rem;font-weight:600;">Publishing</span>
+        </div>
+        <p>You have full control over your published books. You can temporarily unpublish them or permanently delete them at any time.</p>
+        <h3>Unpublishing (Temporary)</h3>
+        <div class="panel-step"><div class="panel-step-num">1</div><p>Go to <strong>Dashboard → My Books</strong></p></div>
+        <div class="panel-step"><div class="panel-step-num">2</div><p>Click the <strong>three-dot menu (⋮)</strong> next to the book you want to unpublish.</p></div>
+        <div class="panel-step"><div class="panel-step-num">3</div><p>Select <strong>"Unpublish"</strong>. The book will be hidden from the catalog within 1 hour but your data is preserved.</p></div>
+        <div class="panel-step"><div class="panel-step-num">4</div><p>To republish, repeat the same steps and select <strong>"Publish"</strong>.</p></div>
+        <h3>Permanent Deletion</h3>
+        <div class="panel-callout p-callout-rose">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>Permanent deletion <strong>cannot be undone</strong>. Download your manuscript file from the dashboard before proceeding.</p>
+        </div>
+        <div class="panel-step"><div class="panel-step-num">1</div><p>Go to <strong>Dashboard → My Books → Book Settings</strong></p></div>
+        <div class="panel-step"><div class="panel-step-num">2</div><p>Scroll to the bottom and click <strong>"Delete This Book"</strong>.</p></div>
+        <div class="panel-step"><div class="panel-step-num">3</div><p>Type the book title to confirm and click <strong>"Permanently Delete"</strong>.</p></div>
+        <p>The book will be removed from the catalog within 48 hours and all data deleted within 30 days. Any pending royalties for reads before deletion will still be paid out.</p>`
+    },
+    'copyright-ownership': {
+        title:'Do I Own My Book After Publishing on Aetheria?',
+        body:`
+        <h2>Do I Own My Book After Publishing <em>on Aetheria?</em></h2>
+        <div class="p-meta">
+            <span class="article-cat-badge" style="color:var(--blue);box-shadow:var(--neu-sm);padding:.22rem .8rem;border-radius:999px;font-size:.72rem;font-weight:600;">Legal</span>
+        </div>
+        <div class="panel-callout p-callout-teal">
+            <i class="fas fa-check-circle"></i>
+            <p><strong>Yes — 100%.</strong> You retain full copyright and intellectual property rights over your work. Always.</p>
+        </div>
+        <h3>What Aetheria Gets</h3>
+        <p>When you publish on Aetheria, you grant us a <strong>non-exclusive, royalty-free, worldwide licence</strong> to host, display, and distribute your work to readers on our platform. That's it.</p>
+        <p>This is similar to uploading a video to YouTube — you still own the video; you've just given the platform permission to show it to people.</p>
+        <h3>What Aetheria CANNOT Do</h3>
+        <ul>
+            <li>Sell your manuscript to third parties</li>
+            <li>Claim co-authorship or any form of ownership</li>
+            <li>Modify or create derivative works from your writing</li>
+            <li>Prevent you from publishing the same work elsewhere</li>
+            <li>Retain your work after you request removal</li>
+        </ul>
+        <h3>Publishing Elsewhere</h3>
+        <p>You are completely free to publish your book on Amazon, Wattpad, Notion Press, or anywhere else simultaneously. We do not require exclusivity of any kind.</p>
+        <p>For the complete legal language, see our <a href="terms.html">Terms of Service, Section 05</a>.</p>`
+    }
+};
+
+function openArticle(id) {
+    const art = articles[id];
+    if (!art) return;
+    document.getElementById('panelTitle').textContent = art.title;
+    document.getElementById('panelBody').innerHTML = art.body;
+    document.getElementById('articlePanel').classList.add('show');
+    document.getElementById('panelOverlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+function closePanel() {
+    document.getElementById('articlePanel').classList.remove('show');
+    document.getElementById('panelOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+}
+function markHelpful(yes) {
+    const btns = document.querySelectorAll('.helpful-btn');
+    btns.forEach(b=>b.style.opacity='.4');
+    document.querySelector(yes?'.helpful-btn.yes':'.helpful-btn.no').style.opacity='1';
+    document.querySelector('.panel-footer p').textContent = yes ? 'Thanks for the feedback! 👍' : 'Sorry to hear that. Please contact us for more help.';
+}
+
+/* ══ FAQ ══ */
+function toggleFaq(btn) {
+    const item=btn.closest('.faq-item'), wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen) item.classList.add('open');
+}
+function filterFaq(cat, btn) {
+    document.querySelectorAll('.faq-cat-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.faq-item').forEach(item=>{
+        item.style.display=(cat==='all'||item.dataset.cat===cat)?'block':'none';
+    });
+}
+
+/* ══ SMOOTH SCROLL ══ */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+        const t=document.querySelector(a.getAttribute('href'));
+        if(t){e.preventDefault();const h=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'))||74;window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-h-20,behavior:'smooth'});}
+    });
+});
+
+/* ══ CATEGORY CLICK SCROLL ══ */
+function showCategory(cat) {
+    document.getElementById('faq').scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(()=>{
+        const btn=[...document.querySelectorAll('.faq-cat-btn')].find(b=>b.onclick&&b.onclick.toString().includes(cat));
+        if(btn) filterFaq(cat,btn);
+    },600);
+}
+</script>
+</body>
+</html>
